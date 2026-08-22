@@ -1,4 +1,4 @@
-name: Notify main site
+name: Notify lluisalemanypuig.github.io site
 
 on:
   push:
