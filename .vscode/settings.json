@@ -3,6 +3,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.autoSave": "afterDelay",
   "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
     "source.fixAll.eslint": "explicit"
   }
 }
