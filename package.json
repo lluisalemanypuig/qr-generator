@@ -4,33 +4,21 @@
   "homepage": "https://lluisalemanypuig.github.io/apps/qr-generator",
   "private": true,
   "dependencies": {
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-	"predeploy": "npm run build",
-	"deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "start": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "browserslist": {
     "production": [
@@ -45,6 +33,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@types/node": "^26.2.0",
+    "@vitejs/plugin-react": "latest",
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.9.6",
+    "typescript": "^7.0.2",
+    "vite": "latest"
   }
 }
