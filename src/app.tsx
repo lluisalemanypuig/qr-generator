@@ -1,9 +1,9 @@
-import { WorkBench } from '@/workbench/work-bench';
 import '@css/App.css';
 import '@css/Button.css';
 import '@css/HorizontalSpace.css';
 import '@css/InputText.css';
 import '@css/OutlineBorder.css';
+import { WorkBench } from '@workbench/work-bench';
 import { Layer, Rect, Stage } from 'react-konva';
 import 'react-tabs/style/react-tabs.css';
 

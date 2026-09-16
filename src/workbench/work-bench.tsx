@@ -1,8 +1,8 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-import { ColoringShape } from './coloring-shape';
-import { ImageLoader } from './image-loader';
-import { QRQualityVersion } from './qr-quality-version';
+import { ColoringShape } from '@workbench/coloring-shape';
+import { ImageLoader } from '@workbench/image-loader';
+import { QRQualityVersion } from '@workbench/qr-quality-version';
 
 export function WorkBench() {
   return (
