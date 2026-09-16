@@ -1,6 +1,5 @@
 import '@css/app.css';
 import '@css/button.css';
-import '@css/horizontal-space.css';
 import '@css/input-text.css';
 import '@css/outline-border.css';
 import { WorkBench } from '@workbench/work-bench';
@@ -12,7 +11,7 @@ export function App() {
   const stageHeight = 200;
 
   return (
-    <div className="app">
+    <div className="app vertical">
       <div className="outline-border">
         <Stage width={stageWidth} height={stageHeight}>
           <Layer>
@@ -29,9 +28,9 @@ export function App() {
         </Stage>
       </div>
 
-      <div className="horizontal-space">
+      <div className="horizontal">
         <input className="input-text" type="text"></input>
-        <button>Save QR to disk</button>
+        <button>Download QR</button>
       </div>
 
       <WorkBench />
