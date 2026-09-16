@@ -1,4 +1,4 @@
-.HorizontalSpace {
+.horizontal-space {
   display: flex;
   flex-direction: row;
   gap: 15px;

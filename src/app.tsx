@@ -1,20 +1,19 @@
-import 'react-tabs/style/react-tabs.css';
-import './assets/css/App.css';
-import './assets/css/Button.css';
-import './assets/css/HorizontalSpace.css';
-import './assets/css/InputText.css';
-import './assets/css/OutlineBorder.css';
-
+import { WorkBench } from '@/workbench/work-bench';
+import '@css/App.css';
+import '@css/Button.css';
+import '@css/HorizontalSpace.css';
+import '@css/InputText.css';
+import '@css/OutlineBorder.css';
 import { Layer, Rect, Stage } from 'react-konva';
-import { WorkBench } from './workbench/work-bench';
+import 'react-tabs/style/react-tabs.css';
 
 export function App() {
   const stageWidth = 200;
   const stageHeight = 200;
 
   return (
-    <div className="App">
-      <div className="OutlineBorder">
+    <div className="app">
+      <div className="outline-border">
         <Stage width={stageWidth} height={stageHeight}>
           <Layer>
             <Rect
@@ -30,9 +29,9 @@ export function App() {
         </Stage>
       </div>
 
-      <div className="HorizontalSpace">
-        <input className="InputText" type="text"></input>
-        <button className="Button">Save QR to disk</button>
+      <div className="horizontal-space">
+        <input className="input-text" type="text"></input>
+        <button>Save QR to disk</button>
       </div>
 
       <WorkBench />

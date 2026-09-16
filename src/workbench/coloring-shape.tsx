@@ -1,3 +1,3 @@
 export function ColoringShape() {
-  return <div></div>;
+  return <div className="two-columns"></div>;
 }
