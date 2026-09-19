@@ -1,5 +1,5 @@
 import { VerticalSpace } from '@components/spaces';
-import '@css/app.css';
+import '@css';
 
 export function ColoringShape() {
   return (

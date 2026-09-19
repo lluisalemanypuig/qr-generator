@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@css/*": ["./src/assets/css/*"],
+      "@css": ["./src/assets/css/index.ts"],
       "@workbench/*": ["./src/workbench/*"],
       "@components/*": ["./src/components/*"]
     },

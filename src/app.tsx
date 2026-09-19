@@ -1,7 +1,4 @@
-import '@css/app.css';
-import '@css/button.css';
-import '@css/input-text.css';
-import '@css/outline-border.css';
+import '@css';
 import { WorkBench } from '@workbench/work-bench';
 import { Canvas, Circle, Point, Rect } from 'fabric';
 import { useEffect, useRef } from 'react';
