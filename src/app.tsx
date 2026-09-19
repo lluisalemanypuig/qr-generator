@@ -12,8 +12,6 @@ export function App() {
   const fabricRef = useRef<Canvas | null>(null);
 
   useEffect(() => {
-    console.log('asdf');
-
     if (!canvasRef.current) {
       return;
     }
