@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@css': path.resolve(__dirname, 'src/assets/css'),
+      '@css': path.resolve(import.meta.dirname, 'src/assets/css'),
       '@workbench': fileURLToPath(new URL('./src/workbench', import.meta.url)),
       '@components': fileURLToPath(
         new URL('./src/components', import.meta.url),
