@@ -1,4 +1,5 @@
 import '@css';
+import { isNotDefined } from '@utils/defined';
 import { WorkBench } from '@workbench/work-bench';
 import { Canvas, Circle, Point, Rect } from 'fabric';
 import { useEffect, useRef } from 'react';
@@ -7,12 +8,36 @@ import 'react-tabs/style/react-tabs.css';
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
 
+function useDownloadSvg(fabricRef: React.RefObject<Canvas | null>) {
+  return () => {
+    const canvas = fabricRef.current;
+    if (isNotDefined(canvas)) {
+      return;
+    }
+
+    const svg = canvas.toSVG();
+
+    const blob = new Blob([svg], {
+      type: 'image/svg+xml;charset=utf-8',
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'canvas.svg';
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
+}
+
 export function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fabricRef = useRef<Canvas | null>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) {
+    if (isNotDefined(canvasRef.current)) {
       return;
     }
 
@@ -53,6 +78,8 @@ export function App() {
     };
   }, []);
 
+  const downloadSvg = useDownloadSvg(fabricRef);
+
   return (
     <div className="app vertical">
       <div className="outline-border">
@@ -69,7 +96,9 @@ export function App() {
           ></input>
         </div>
         <div>
-          <button style={{ float: 'right' }}>Download QR</button>
+          <button onClick={downloadSvg} style={{ float: 'right' }}>
+            Download QR
+          </button>
         </div>
 
         <WorkBench />
