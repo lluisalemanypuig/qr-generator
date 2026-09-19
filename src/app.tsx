@@ -3,29 +3,65 @@ import '@css/button.css';
 import '@css/input-text.css';
 import '@css/outline-border.css';
 import { WorkBench } from '@workbench/work-bench';
-import { Layer, Rect, Stage } from 'react-konva';
+import { Canvas, Circle, Point, Rect } from 'fabric';
+import { useEffect, useRef } from 'react';
 import 'react-tabs/style/react-tabs.css';
 
+const CANVAS_WIDTH = 400;
+const CANVAS_HEIGHT = 400;
+
 export function App() {
-  const stageWidth = 200;
-  const stageHeight = 200;
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const fabricRef = useRef<Canvas | null>(null);
+
+  useEffect(() => {
+    console.log('asdf');
+
+    if (!canvasRef.current) {
+      return;
+    }
+
+    const canvas = new Canvas(canvasRef.current, {
+      width: CANVAS_WIDTH,
+      height: CANVAS_HEIGHT,
+      backgroundColor: '#ffffff',
+    });
+
+    fabricRef.current = canvas;
+
+    // Add some objects
+    const rectangle = new Rect({
+      width: CANVAS_WIDTH - 20,
+      height: CANVAS_HEIGHT - 20,
+      fill: 'rgba(255, 0, 0, 0.5)',
+      rx: 10,
+      ry: 10,
+      selectable: false,
+    });
+    rectangle.setPositionByOrigin(new Point(10, 10), 'left', 'top');
+
+    const circle = new Circle({
+      left: 400,
+      top: 150,
+      radius: 70,
+      fill: 'rgba(0, 100, 255, 0.5)',
+      selectable: false,
+    });
+
+    canvas.add(rectangle, circle);
+    canvas.renderAll();
+
+    // Cleanup
+    return () => {
+      canvas.dispose();
+      fabricRef.current = null;
+    };
+  }, []);
 
   return (
     <div className="app vertical">
       <div className="outline-border">
-        <Stage width={stageWidth} height={stageHeight}>
-          <Layer>
-            <Rect
-              x={0}
-              y={0}
-              width={stageWidth}
-              height={stageHeight}
-              fill="white"
-              shadowBlur={0}
-              draggable={false}
-            />
-          </Layer>
-        </Stage>
+        <canvas ref={canvasRef} />
       </div>
 
       <div className="vertical">

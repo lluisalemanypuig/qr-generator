@@ -9,6 +9,9 @@ export default defineConfig({
     alias: {
       '@css': fileURLToPath(new URL('./src/assets/css', import.meta.url)),
       '@workbench': fileURLToPath(new URL('./src/workbench', import.meta.url)),
+      '@components': fileURLToPath(
+        new URL('./src/components', import.meta.url),
+      ),
     },
   },
   build: {
