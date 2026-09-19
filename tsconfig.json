@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "@css/*": ["./src/assets/css/*"],
-      "@workbench/*": ["./src/workbench/*"]
+      "@css": ["./src/assets/css/index.ts"],
+      "@workbench/*": ["./src/workbench/*"],
+      "@components/*": ["./src/components/*"]
     },
     "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],

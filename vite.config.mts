@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import path from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 
@@ -7,8 +8,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@css': fileURLToPath(new URL('./src/assets/css', import.meta.url)),
+      '@css': path.resolve(__dirname, 'src/assets/css'),
       '@workbench': fileURLToPath(new URL('./src/workbench', import.meta.url)),
+      '@components': fileURLToPath(
+        new URL('./src/components', import.meta.url),
+      ),
     },
   },
   build: {

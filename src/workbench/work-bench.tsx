@@ -1,12 +1,14 @@
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-
 import { ColoringShape } from '@workbench/coloring-shape';
 import { ImageLoader } from '@workbench/image-loader';
 import { QRQualityVersion } from '@workbench/qr-quality-version';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 export function WorkBench() {
   return (
-    <div>
+    // This div should have a fixed position with respect to the bottom
+    // of the page. The height should be the maximum height of the tabs,
+    // the width should be maximum width of the tabs
+    <div style={{ height: 220, width: 600 }}>
       <Tabs>
         <TabList>
           <Tab>Coloring and shape</Tab>
