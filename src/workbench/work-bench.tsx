@@ -6,7 +6,10 @@ import { QRQualityVersion } from '@workbench/qr-quality-version';
 
 export function WorkBench() {
   return (
-    <div>
+    // This div should have a fixed position with respect to the bottom
+    // of the page. The height should be the maximum height of the tabs,
+    // the width should be maximum width of the tabs
+    <div style={{ height: 220, width: 600 }}>
       <Tabs>
         <TabList>
           <Tab>Coloring and shape</Tab>

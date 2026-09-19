@@ -8,28 +8,27 @@ export function ImageLoader() {
         <button>Remove image</button>
       </div>
       <div className="vertical">
-        <div className="horizontal">
-          <div className="vertical row-4" style={{ textAlign: 'left' }}>
-            <label>Image size</label>
-            <label>Background shape</label>
-            <label>Background color</label>
-            <label>Background border</label>
-            <label>Background size</label>
-          </div>
-          <div className="vertical row-4">
-            <input type="range" />
-            <select></select>
-            <select></select>
-            <select></select>
-            <input type="range" />
-          </div>
-          <div className="vertical row-4">
-            <label>%</label>
-            <div></div>
-            <div></div>
-            <div></div>
-            <label>%</label>
-          </div>
+        <div className="horizontal col-3">
+          <label style={{ textAlign: 'left' }}>Image size</label>
+          <input type="range" />
+          <label style={{ textAlign: 'left' }}>%</label>
+        </div>
+        <div className="horizontal col-3">
+          <label style={{ textAlign: 'left' }}>Background shape</label>
+          <select></select>
+        </div>
+        <div className="horizontal col-3">
+          <label style={{ textAlign: 'left' }}>Background color</label>
+          <select></select>
+        </div>
+        <div className="horizontal col-3">
+          <label style={{ textAlign: 'left' }}>Background border</label>
+          <select></select>
+        </div>
+        <div className="horizontal col-3">
+          <label style={{ textAlign: 'left' }}>Background size</label>
+          <input type="range" />
+          <label style={{ textAlign: 'left' }}>%</label>
         </div>
       </div>
     </div>

@@ -28,12 +28,21 @@ export function App() {
         </Stage>
       </div>
 
-      <div className="horizontal">
-        <input className="input-text" type="text"></input>
-        <button>Download QR</button>
-      </div>
+      <div className="vertical">
+        <label style={{ textAlign: 'left' }}>Encode text into a QR:</label>
+        <div className="horizontal">
+          <input
+            className="input-text"
+            style={{ width: '100%' }}
+            type="text"
+          ></input>
+        </div>
+        <div>
+          <button style={{ float: 'right' }}>Download QR</button>
+        </div>
 
-      <WorkBench />
+        <WorkBench />
+      </div>
     </div>
   );
 }
