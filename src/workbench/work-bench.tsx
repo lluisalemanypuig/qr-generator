@@ -2,12 +2,10 @@ import { ColoringShape } from '@workbench/coloring-shape';
 import { ImageLoader } from '@workbench/image-loader';
 import { QRQualityVersion } from '@workbench/qr-quality-version';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { QRGeneratorProvider } from './context/context';
 
-export function WorkBench() {
+function ControlPanel() {
   return (
-    // This div should have a fixed position with respect to the bottom
-    // of the page. The height should be the maximum height of the tabs,
-    // the width should be maximum width of the tabs
     <div style={{ height: 220, width: 600 }}>
       <Tabs>
         <TabList>
@@ -27,5 +25,33 @@ export function WorkBench() {
         </TabPanel>
       </Tabs>
     </div>
+  );
+}
+
+interface WorkbenchProps {
+  download: () => void;
+}
+
+export function WorkBench({ download }: WorkbenchProps) {
+  return (
+    <QRGeneratorProvider>
+      <div className="vertical">
+        <label style={{ textAlign: 'left' }}>Encode text into a QR:</label>
+        <div className="horizontal">
+          <input
+            className="input-text"
+            style={{ width: '100%' }}
+            type="text"
+          ></input>
+        </div>
+        <div>
+          <button onClick={download} style={{ float: 'right' }}>
+            Download QR
+          </button>
+        </div>
+
+        <ControlPanel />
+      </div>
+    </QRGeneratorProvider>
   );
 }
