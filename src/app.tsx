@@ -8,30 +8,6 @@ import 'react-tabs/style/react-tabs.css';
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
 
-function useDownloadSvg(fabricRef: React.RefObject<Canvas | null>) {
-  return () => {
-    const canvas = fabricRef.current;
-    if (isNotDefined(canvas)) {
-      return;
-    }
-
-    const svg = canvas.toSVG();
-
-    const blob = new Blob([svg], {
-      type: 'image/svg+xml;charset=utf-8',
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'canvas.svg';
-    link.click();
-
-    URL.revokeObjectURL(url);
-  };
-}
-
 export function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fabricRef = useRef<Canvas | null>(null);
@@ -78,15 +54,13 @@ export function App() {
     };
   }, []);
 
-  const downloadSvg = useDownloadSvg(fabricRef);
-
   return (
     <div className="app vertical">
       <div className="outline-border">
         <canvas ref={canvasRef} />
       </div>
 
-      <WorkBench download={downloadSvg} />
+      <WorkBench canvasRef={fabricRef} />
     </div>
   );
 }
