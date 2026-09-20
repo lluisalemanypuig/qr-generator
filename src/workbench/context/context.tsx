@@ -64,7 +64,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   const { options: qualityOptions, setECC } = QRQualityOptionsState();
 
   const generateQR = () => {
-    console.log('Generating QR');
+    console.log(`Generating QR`);
   };
 
   return (
@@ -93,7 +93,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useQRGenerator() {
+export function useQRGeneratorContext() {
   const context = useContext(QRGeneratorContext);
 
   if (isNotDefined(context)) {

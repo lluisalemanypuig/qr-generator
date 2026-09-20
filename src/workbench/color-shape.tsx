@@ -1,9 +1,9 @@
-import { ColorSelect } from '@components/color-select';
-import { LabelLeftAligned } from '@components/labels';
-import { ShapeSelect } from '@components/shape-select';
-import { VerticalSpace } from '@components/spaces';
 import '@css';
-import { useQRGenerator } from '@workbench/context/context';
+import { ColorSelect } from '@workbench/components/color-select';
+import { LabelLeftAligned } from '@workbench/components/labels';
+import { ShapeSelect } from '@workbench/components/shape-select';
+import { VerticalSpace } from '@workbench/components/spaces';
+import { useQRGeneratorContext } from '@workbench/context/context';
 import {
   ALL_ALIGNMENT_SHAPES,
   ALL_POINT_SHAPES,
@@ -17,7 +17,7 @@ export function ColorShape() {
     setPointShape,
     setAlignmentShape,
     setTransparentBackground,
-  } = useQRGenerator();
+  } = useQRGeneratorContext();
 
   return (
     <>

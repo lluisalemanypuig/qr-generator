@@ -1,10 +1,10 @@
-import { ECCSelect } from '@components/ecc-select';
-import { LabelLeftAligned } from '@components/labels';
-import { VerticalSpace } from '@components/spaces';
-import { useQRGenerator } from '@workbench/context/context';
+import { ECCSelect } from '@workbench/components/ecc-select';
+import { LabelLeftAligned } from '@workbench/components/labels';
+import { VerticalSpace } from '@workbench/components/spaces';
+import { useQRGeneratorContext } from '@workbench/context/context';
 
 export function QRQualityVersion() {
-  const { quality, setECC } = useQRGenerator();
+  const { quality, setECC } = useQRGeneratorContext();
 
   return (
     <>

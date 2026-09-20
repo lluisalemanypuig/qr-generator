@@ -11,7 +11,7 @@ export default defineConfig({
       '@css': path.resolve(import.meta.dirname, 'src/assets/css'),
       '@workbench': fileURLToPath(new URL('./src/workbench', import.meta.url)),
       '@components': fileURLToPath(
-        new URL('./src/components', import.meta.url),
+        new URL('./src/workbench/components', import.meta.url),
       ),
       '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
     },

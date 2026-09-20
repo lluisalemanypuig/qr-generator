@@ -3,7 +3,7 @@
     "paths": {
       "@css": ["./src/assets/css/index.ts"],
       "@workbench/*": ["./src/workbench/*"],
-      "@components/*": ["./src/components/*"],
+      "@components/*": ["./src/workbench/components/*"],
       "@utils/*": ["./src/utils/*"]
     },
     "target": "es2017",
