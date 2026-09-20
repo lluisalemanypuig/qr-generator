@@ -11,9 +11,9 @@ export function ColorSelect({ initialValue, setColor }: ColorSelectProps) {
       value={initialValue}
       onChange={(event) => setColor(event.target.value)}
     >
-      {COLORS.map((color: Color) => {
-        return <option value={color.id}>{color.name}</option>;
-      })}
+      {COLORS.map((color: Color) => (
+        <option value={color.id}>{color.name}</option>
+      ))}
     </select>
   );
 }
