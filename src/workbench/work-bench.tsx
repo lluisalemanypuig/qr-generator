@@ -1,31 +1,83 @@
-import { ColoringShape } from '@workbench/coloring-shape';
+import { isNotDefined } from '@utils/defined';
+import { ColorShape } from '@workbench/color-shape';
+import { InputText } from '@workbench/components/input-text';
+import { LabelLeftAligned } from '@workbench/components/labels';
+import { QRGeneratorProvider } from '@workbench/context/context';
 import { ImageLoader } from '@workbench/image-loader';
 import { QRQualityVersion } from '@workbench/qr-quality-version';
+import { Canvas } from 'fabric';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-export function WorkBench() {
-  return (
-    // This div should have a fixed position with respect to the bottom
-    // of the page. The height should be the maximum height of the tabs,
-    // the width should be maximum width of the tabs
-    <div style={{ height: 220, width: 600 }}>
-      <Tabs>
-        <TabList>
-          <Tab>Coloring and shape</Tab>
-          <Tab>Load image</Tab>
-          <Tab>QR quality</Tab>
-        </TabList>
+function useDownloadSvg(fabricRef: React.RefObject<Canvas | null>) {
+  return () => {
+    const canvas = fabricRef.current;
+    if (isNotDefined(canvas)) {
+      return;
+    }
 
-        <TabPanel>
-          <ColoringShape />
-        </TabPanel>
-        <TabPanel>
-          <ImageLoader />
-        </TabPanel>
-        <TabPanel>
-          <QRQualityVersion />
-        </TabPanel>
-      </Tabs>
+    const svg = canvas.toSVG();
+
+    const blob = new Blob([svg], {
+      type: 'image/svg+xml;charset=utf-8',
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'canvas.svg';
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
+}
+
+interface WorkbenchProps {
+  canvasRef: React.RefObject<Canvas | null>;
+}
+
+function ControlPanel({ canvasRef }: WorkbenchProps) {
+  const downloadSvg = useDownloadSvg(canvasRef);
+
+  return (
+    <div className="vertical">
+      <LabelLeftAligned text={'Encode text into a QR:'} />
+      <div className="horizontal">
+        <InputText />
+      </div>
+      <div>
+        <button onClick={downloadSvg} style={{ float: 'right' }}>
+          Download QR
+        </button>
+      </div>
+
+      <div style={{ height: 220, width: 600 }}>
+        <Tabs>
+          <TabList>
+            <Tab>Coloring and shape</Tab>
+            <Tab>Load image</Tab>
+            <Tab>QR quality</Tab>
+          </TabList>
+
+          <TabPanel>
+            <ColorShape />
+          </TabPanel>
+          <TabPanel>
+            <ImageLoader />
+          </TabPanel>
+          <TabPanel>
+            <QRQualityVersion />
+          </TabPanel>
+        </Tabs>
+      </div>
     </div>
+  );
+}
+
+export function WorkBench({ canvasRef }: WorkbenchProps) {
+  return (
+    <QRGeneratorProvider>
+      <ControlPanel canvasRef={canvasRef} />
+    </QRGeneratorProvider>
   );
 }
