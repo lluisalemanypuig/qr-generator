@@ -1,3 +1,4 @@
+import { isNotDefined } from '@utils/defined';
 import {
   QRColorAndShapeOptions,
   QRColorAndShapeOptionsState,
@@ -91,7 +92,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
 export function useQRGenerator() {
   const context = useContext(QRGeneratorContext);
 
-  if (!context) {
+  if (isNotDefined(context)) {
     throw new Error('useQRGenerator must be used inside QRGeneratorProvider');
   }
 
