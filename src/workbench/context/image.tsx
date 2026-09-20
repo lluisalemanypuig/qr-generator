@@ -1,3 +1,4 @@
+import { Color } from '@workbench/enums/colors';
 import { ImageBackgroundShape } from '@workbench/enums/shapes';
 import { useState } from 'react';
 
@@ -5,8 +6,8 @@ export interface QRImageOptions {
   image: string | undefined; // this is not a string
   imageSize: number; // a percentage of the original image
   backgroundShape: ImageBackgroundShape;
-  backgroundColor: string;
-  backgroundBorderColor: string;
+  backgroundColor: Color;
+  backgroundBorderColor: Color;
   backgroundSize: number;
 }
 
@@ -15,8 +16,8 @@ export function QRImageOptionsState() {
     image: undefined,
     imageSize: 1,
     backgroundShape: 'None',
-    backgroundColor: 'black',
-    backgroundBorderColor: 'black',
+    backgroundColor: 'White',
+    backgroundBorderColor: 'Black',
     backgroundSize: 1,
   });
 
@@ -41,14 +42,14 @@ export function QRImageOptionsState() {
     }));
   };
 
-  const setBackgroundColor = (backgroundColor: string) => {
+  const setBackgroundColor = (backgroundColor: Color) => {
     setOptions((previous) => ({
       ...previous,
       backgroundColor,
     }));
   };
 
-  const setBackgroundBorderColor = (backgroundBorderColor: string) => {
+  const setBackgroundBorderColor = (backgroundBorderColor: Color) => {
     setOptions((previous) => ({
       ...previous,
       backgroundBorderColor,

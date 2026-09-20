@@ -12,7 +12,7 @@ export function ColorSelect({ initialValue, setColor }: ColorSelectProps) {
       onChange={(event) => setColor(event.target.value)}
     >
       {COLORS.map((color: Color) => (
-        <option value={color.id}>{color.name}</option>
+        <option value={color}>{color}</option>
       ))}
     </select>
   );

@@ -8,6 +8,7 @@ import {
   QRQualityOptions,
   QRQualityOptionsState,
 } from '@workbench/context/quality';
+import { Color } from '@workbench/enums/colors';
 import { ECC } from '@workbench/enums/quality';
 import {
   AlignmentShape,
@@ -18,8 +19,8 @@ import { createContext, ReactNode, useContext } from 'react';
 
 interface QRGeneratorContextType {
   colorAndShape: QRColorAndShapeOptions;
-  setFillColor: (color: string) => void;
-  setBorderColor: (color: string) => void;
+  setFillColor: (color: Color) => void;
+  setBorderColor: (color: Color) => void;
   setPointShape: (shape: PointShape) => void;
   setAlignmentShape: (shape: AlignmentShape) => void;
 
@@ -27,8 +28,8 @@ interface QRGeneratorContextType {
   setImage: (image: string | undefined) => void;
   setImageSize: (size: number) => void;
   setBackgroundShape: (shape: ImageBackgroundShape) => void;
-  setBackgroundColor: (backgroundColor: string) => void;
-  setBackgroundBorderColor: (backgroundBorderColor: string) => void;
+  setBackgroundColor: (backgroundColor: Color) => void;
+  setBackgroundBorderColor: (backgroundBorderColor: Color) => void;
   setBackgroundSize: (size: number) => void;
 
   quality: QRQualityOptions | undefined;

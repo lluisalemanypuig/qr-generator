@@ -1,29 +1,30 @@
+import { Color } from '@workbench/enums/colors';
 import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
 import { useState } from 'react';
 
 export interface QRColorAndShapeOptions {
-  fillColor: string;
-  borderColor: string;
+  fillColor: Color;
+  borderColor: Color;
   pointShape: PointShape;
   alignmentShape: AlignmentShape;
 }
 
 export function QRColorAndShapeOptionsState() {
   const [options, setOptions] = useState<QRColorAndShapeOptions>({
-    fillColor: 'black',
-    borderColor: 'black',
+    fillColor: 'Black',
+    borderColor: 'Black',
     pointShape: 'Square',
     alignmentShape: 'Square',
   });
 
-  const setFillColor = (fillColor: string) => {
+  const setFillColor = (fillColor: Color) => {
     setOptions((previous) => ({
       ...previous,
       fillColor,
     }));
   };
 
-  const setBorderColor = (borderColor: string) => {
+  const setBorderColor = (borderColor: Color) => {
     setOptions((previous) => ({
       ...previous,
       borderColor,
