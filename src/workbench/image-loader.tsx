@@ -1,7 +1,12 @@
+import { ColorSelect } from '@components/color-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
+import { useQRGenerator } from '@workbench/context/context';
 
 export function ImageLoader() {
+  const { image, setBackgroundColor, setBackgroundBorderColor } =
+    useQRGenerator();
+
   return (
     <>
       <VerticalSpace />
@@ -22,11 +27,17 @@ export function ImageLoader() {
           </div>
           <div className="horizontal col-3">
             <label style={{ textAlign: 'left' }}>Background color</label>
-            <select></select>
+            <ColorSelect
+              initialValue={image.backgroundColor}
+              setColor={setBackgroundColor}
+            />
           </div>
           <div className="horizontal col-3">
             <label style={{ textAlign: 'left' }}>Background border</label>
-            <select></select>
+            <ColorSelect
+              initialValue={image.backgroundBorderColor}
+              setColor={setBackgroundBorderColor}
+            />
           </div>
           <div className="horizontal col-3">
             <label style={{ textAlign: 'left' }}>Background size</label>

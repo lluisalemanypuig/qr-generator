@@ -1,10 +1,10 @@
+import { ColorSelect } from '@components/color-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
 import { useQRGenerator } from '@workbench/context/context';
-import { Color, COLORS } from '@workbench/enums/colors';
 
 export function ColoringShape() {
-  const { colorAndShape, setFillColor } = useQRGenerator();
+  const { colorAndShape, setFillColor, setBorderColor } = useQRGenerator();
 
   return (
     <>
@@ -12,20 +12,19 @@ export function ColoringShape() {
       <div className="vertical">
         <div className="horizontal col-4">
           <label style={{ textAlign: 'left' }}>Fill</label>
-          <select
-            value={colorAndShape.fillColor}
-            onChange={(event) => setFillColor(event.target.value)}
-          >
-            {COLORS.map((color: Color) => {
-              return <option value={color.id}>{color.name}</option>;
-            })}
-          </select>
+          <ColorSelect
+            initialValue={colorAndShape.fillColor}
+            setColor={setFillColor}
+          />
           <label style={{ textAlign: 'left' }}>Point shape</label>
           <select></select>
         </div>
         <div className="horizontal col-4">
           <label style={{ textAlign: 'left' }}>Border</label>
-          <select></select>
+          <ColorSelect
+            initialValue={colorAndShape.borderColor}
+            setColor={setBorderColor}
+          />
           <label style={{ textAlign: 'left' }}>Alignment shape</label>
           <select></select>
         </div>
