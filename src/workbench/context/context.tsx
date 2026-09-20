@@ -2,7 +2,7 @@ import { isNotDefined } from '@utils/defined';
 import {
   QRColorAndShapeOptions,
   QRColorAndShapeOptionsState,
-} from '@workbench/context/color-and-shape';
+} from '@workbench/context/color-shape';
 import { QRImageOptions, QRImageOptionsState } from '@workbench/context/image';
 import {
   QRQualityOptions,
