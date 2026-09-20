@@ -1,5 +1,5 @@
 import { isNotDefined } from '@utils/defined';
-import { ColoringShape } from '@workbench/coloring-shape';
+import { ColorShape } from '@workbench/color-shape';
 import { ImageLoader } from '@workbench/image-loader';
 import { QRQualityVersion } from '@workbench/qr-quality-version';
 import { Canvas } from 'fabric';
@@ -41,7 +41,7 @@ function ControlPanel() {
         </TabList>
 
         <TabPanel>
-          <ColoringShape />
+          <ColorShape />
         </TabPanel>
         <TabPanel>
           <ImageLoader />

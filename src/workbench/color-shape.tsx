@@ -3,7 +3,7 @@ import { VerticalSpace } from '@components/spaces';
 import '@css';
 import { useQRGenerator } from '@workbench/context/context';
 
-export function ColoringShape() {
+export function ColorShape() {
   const { colorAndShape, setFillColor, setBorderColor } = useQRGenerator();
 
   return (
