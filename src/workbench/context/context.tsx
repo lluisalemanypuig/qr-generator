@@ -15,7 +15,7 @@ import {
   ImageBackgroundShape,
   PointShape,
 } from '@workbench/enums/shapes';
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext, useEffect } from 'react';
 import { TextOptions, TextOptionsState } from './text';
 
 interface QRGeneratorContextType {
@@ -70,8 +70,14 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   const { options: qualityOptions, setECC } = QRQualityOptionsState();
 
   const generateQR = () => {
-    console.log(`Generating QR`);
+    console.log(
+      `Generating QR: ${textOptions.text}, ${colorAndShapeOptions.fillColor}`,
+    );
   };
+
+  useEffect(() => {
+    generateQR();
+  }, [textOptions, colorAndShapeOptions, imageOptions, qualityOptions]);
 
   return (
     <QRGeneratorContext.Provider
