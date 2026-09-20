@@ -1,4 +1,5 @@
 import { ColorSelect } from '@components/color-select';
+import { LabelLeftAligned } from '@components/labels';
 import { ShapeSelect } from '@components/shape-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
@@ -22,12 +23,12 @@ export function ColorShape() {
       <VerticalSpace />
       <div className="vertical">
         <div className="horizontal col-4">
-          <label style={{ textAlign: 'left' }}>Fill</label>
+          <LabelLeftAligned text={'Fill color'} />
           <ColorSelect
             initialValue={colorAndShape.fillColor}
             setColor={setFillColor}
           />
-          <label style={{ textAlign: 'left' }}>Point shape</label>
+          <LabelLeftAligned text={'Point shape'} />
           <ShapeSelect
             initialValue={colorAndShape.pointShape}
             allValues={ALL_POINT_SHAPES}
@@ -35,12 +36,12 @@ export function ColorShape() {
           />
         </div>
         <div className="horizontal col-4">
-          <label style={{ textAlign: 'left' }}>Border</label>
+          <LabelLeftAligned text={'Border color'} />
           <ColorSelect
             initialValue={colorAndShape.borderColor}
             setColor={setBorderColor}
           />
-          <label style={{ textAlign: 'left' }}>Alignment shape</label>
+          <LabelLeftAligned text={'Alignment shape'} />
           <ShapeSelect
             initialValue={colorAndShape.alignmentShape}
             allValues={ALL_ALIGNMENT_SHAPES}

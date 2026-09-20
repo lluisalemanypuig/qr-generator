@@ -1,3 +1,4 @@
+import { LabelLeftAligned } from '@components/labels';
 import { VerticalSpace } from '@components/spaces';
 
 export function QRQualityVersion() {
@@ -5,7 +6,7 @@ export function QRQualityVersion() {
     <>
       <VerticalSpace />
       <div className="horizontal col-4">
-        <label>ECC</label>
+        <LabelLeftAligned text={'ECC'} />
         <select></select>
       </div>
     </>

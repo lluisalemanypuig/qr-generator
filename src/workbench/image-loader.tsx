@@ -1,4 +1,5 @@
 import { ColorSelect } from '@components/color-select';
+import { LabelLeftAligned } from '@components/labels';
 import { ShapeSelect } from '@components/shape-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
@@ -23,12 +24,12 @@ export function ImageLoader() {
         </div>
         <div className="vertical">
           <div className="horizontal col-3">
-            <label style={{ textAlign: 'left' }}>Image size</label>
+            <LabelLeftAligned text={'Image size'} />
             <input type="range" />
-            <label style={{ textAlign: 'left' }}>%</label>
+            <LabelLeftAligned text={'%'} />
           </div>
           <div className="horizontal col-3">
-            <label style={{ textAlign: 'left' }}>Background shape</label>
+            <LabelLeftAligned text={'Background shape'} />
             <ShapeSelect
               initialValue={image.backgroundShape}
               allValues={ALL_IMAGE_BACKGROUND_SHAPES}
@@ -36,23 +37,23 @@ export function ImageLoader() {
             />
           </div>
           <div className="horizontal col-3">
-            <label style={{ textAlign: 'left' }}>Background color</label>
+            <LabelLeftAligned text={'Background color'} />
             <ColorSelect
               initialValue={image.backgroundColor}
               setColor={setBackgroundColor}
             />
           </div>
           <div className="horizontal col-3">
-            <label style={{ textAlign: 'left' }}>Background border</label>
+            <LabelLeftAligned text={'Background border color'} />
             <ColorSelect
               initialValue={image.backgroundBorderColor}
               setColor={setBackgroundBorderColor}
             />
           </div>
           <div className="horizontal col-3">
-            <label style={{ textAlign: 'left' }}>Background size</label>
+            <LabelLeftAligned text={'Background size'} />
             <input type="range" />
-            <label style={{ textAlign: 'left' }}>%</label>
+            <LabelLeftAligned text={'%'} />
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { LabelLeftAligned } from '@components/labels';
 import { isNotDefined } from '@utils/defined';
 import { ColorShape } from '@workbench/color-shape';
 import { ImageLoader } from '@workbench/image-loader';
@@ -64,7 +65,7 @@ export function WorkBench({ canvasRef }: WorkbenchProps) {
   return (
     <QRGeneratorProvider>
       <div className="vertical">
-        <label style={{ textAlign: 'left' }}>Encode text into a QR:</label>
+        <LabelLeftAligned text={'Encode text into a QR:'} />
         <div className="horizontal">
           <input
             className="input-text"
