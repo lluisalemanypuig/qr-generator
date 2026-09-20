@@ -10,7 +10,7 @@ function fromStringToShape<T>(shape: string, values: readonly string[]): T {
       return shape as T;
     }
   }
-  return 'Sqaure' as T;
+  return 'Square' as T;
 }
 
 export function ShapeSelect<T>({
