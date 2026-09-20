@@ -16,6 +16,7 @@ export function ColorShape() {
     setBorderColor,
     setPointShape,
     setAlignmentShape,
+    setTransparentBackground,
   } = useQRGenerator();
 
   return (
@@ -50,7 +51,10 @@ export function ColorShape() {
         </div>
 
         <div className="horizontal">
-          <input type="checkbox"></input>
+          <input
+            onChange={(event) => setTransparentBackground(event.target.checked)}
+            type="checkbox"
+          ></input>
           <label>Transparent background</label>
         </div>
       </div>

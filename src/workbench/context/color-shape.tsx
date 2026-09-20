@@ -7,6 +7,7 @@ export interface QRColorAndShapeOptions {
   borderColor: Color;
   pointShape: PointShape;
   alignmentShape: AlignmentShape;
+  transparentBackground: boolean;
 }
 
 export function QRColorAndShapeOptionsState() {
@@ -15,6 +16,7 @@ export function QRColorAndShapeOptionsState() {
     borderColor: 'Black',
     pointShape: 'Square',
     alignmentShape: 'Square',
+    transparentBackground: false,
   });
 
   const setFillColor = (fillColor: Color) => {
@@ -45,11 +47,19 @@ export function QRColorAndShapeOptionsState() {
     }));
   };
 
+  const setTransparentBackground = (transparentBackground: boolean) => {
+    setOptions((previous) => ({
+      ...previous,
+      transparentBackground,
+    }));
+  };
+
   return {
     options,
     setFillColor,
     setBorderColor,
     setPointShape,
     setAlignmentShape,
+    setTransparentBackground,
   };
 }

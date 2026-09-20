@@ -23,6 +23,7 @@ interface QRGeneratorContextType {
   setBorderColor: (color: Color) => void;
   setPointShape: (shape: PointShape) => void;
   setAlignmentShape: (shape: AlignmentShape) => void;
+  setTransparentBackground: (transparent: boolean) => void;
 
   image: QRImageOptions;
   setImage: (image: string | undefined) => void;
@@ -47,6 +48,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
     setBorderColor,
     setPointShape,
     setAlignmentShape,
+    setTransparentBackground,
   } = QRColorAndShapeOptionsState();
 
   const {
@@ -73,6 +75,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
         setBorderColor,
         setPointShape,
         setAlignmentShape,
+        setTransparentBackground,
         image: imageOptions,
         setImage,
         setImageSize,
