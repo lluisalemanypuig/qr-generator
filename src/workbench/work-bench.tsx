@@ -1,5 +1,6 @@
 import { isNotDefined } from '@utils/defined';
 import { ColorShape } from '@workbench/color-shape';
+import { InputText } from '@workbench/components/input-text';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { QRGeneratorProvider } from '@workbench/context/context';
 import { ImageLoader } from '@workbench/image-loader';
@@ -42,11 +43,7 @@ function ControlPanel({ canvasRef }: WorkbenchProps) {
     <div className="vertical">
       <LabelLeftAligned text={'Encode text into a QR:'} />
       <div className="horizontal">
-        <input
-          className="input-text"
-          style={{ width: '100%' }}
-          type="text"
-        ></input>
+        <InputText />
       </div>
       <div>
         <button onClick={downloadSvg} style={{ float: 'right' }}>

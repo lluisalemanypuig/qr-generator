@@ -16,8 +16,12 @@ import {
   PointShape,
 } from '@workbench/enums/shapes';
 import { createContext, ReactNode, useContext } from 'react';
+import { TextOptions, TextOptionsState } from './text';
 
 interface QRGeneratorContextType {
+  text: TextOptions;
+  setText: (s: string) => void;
+
   colorAndShape: QRColorAndShapeOptions;
   setFillColor: (color: Color) => void;
   setBorderColor: (color: Color) => void;
@@ -42,6 +46,8 @@ interface QRGeneratorContextType {
 const QRGeneratorContext = createContext<QRGeneratorContextType | null>(null);
 
 export function QRGeneratorProvider({ children }: { children: ReactNode }) {
+  const { options: textOptions, setText } = TextOptionsState();
+
   const {
     options: colorAndShapeOptions,
     setFillColor,
@@ -70,12 +76,17 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   return (
     <QRGeneratorContext.Provider
       value={{
+        // ----
+        text: textOptions,
+        setText,
+        // ----
         colorAndShape: colorAndShapeOptions,
         setFillColor,
         setBorderColor,
         setPointShape,
         setAlignmentShape,
         setTransparentBackground,
+        // ----
         image: imageOptions,
         setImage,
         setImageSize,
@@ -83,6 +94,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
         setBackgroundColor,
         setBackgroundBorderColor,
         setBackgroundSize,
+        // ----
         quality: qualityOptions,
         setECC,
         generateQR,
