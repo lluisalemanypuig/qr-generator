@@ -1,11 +1,17 @@
 import { ColorSelect } from '@components/color-select';
+import { ShapeSelect } from '@components/shape-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
 import { useQRGenerator } from '@workbench/context/context';
+import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
 
 export function ImageLoader() {
-  const { image, setBackgroundColor, setBackgroundBorderColor } =
-    useQRGenerator();
+  const {
+    image,
+    setBackgroundColor,
+    setBackgroundBorderColor,
+    setBackgroundShape,
+  } = useQRGenerator();
 
   return (
     <>
@@ -23,7 +29,11 @@ export function ImageLoader() {
           </div>
           <div className="horizontal col-3">
             <label style={{ textAlign: 'left' }}>Background shape</label>
-            <select></select>
+            <ShapeSelect
+              initialValue={image.backgroundShape}
+              allValues={ALL_IMAGE_BACKGROUND_SHAPES}
+              setShape={setBackgroundShape}
+            />
           </div>
           <div className="horizontal col-3">
             <label style={{ textAlign: 'left' }}>Background color</label>

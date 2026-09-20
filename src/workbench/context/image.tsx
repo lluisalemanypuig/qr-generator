@@ -14,7 +14,7 @@ export function QRImageOptionsState() {
   const [options, setOptions] = useState<QRImageOptions>({
     image: undefined,
     imageSize: 1,
-    backgroundShape: 'NONE',
+    backgroundShape: 'None',
     backgroundColor: 'black',
     backgroundBorderColor: 'black',
     backgroundSize: 1,

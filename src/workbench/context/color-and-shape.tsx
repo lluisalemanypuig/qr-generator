@@ -12,8 +12,8 @@ export function QRColorAndShapeOptionsState() {
   const [options, setOptions] = useState<QRColorAndShapeOptions>({
     fillColor: 'black',
     borderColor: 'black',
-    pointShape: 'SQUARES',
-    alignmentShape: 'SQUARES',
+    pointShape: 'Square',
+    alignmentShape: 'Square',
   });
 
   const setFillColor = (fillColor: string) => {
