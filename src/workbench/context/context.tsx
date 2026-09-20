@@ -32,7 +32,7 @@ interface QRGeneratorContextType {
   setBackgroundBorderColor: (backgroundBorderColor: Color) => void;
   setBackgroundSize: (size: number) => void;
 
-  quality: QRQualityOptions | undefined;
+  quality: QRQualityOptions;
   setECC: (ecc: ECC) => void;
 
   generateQR: () => void;

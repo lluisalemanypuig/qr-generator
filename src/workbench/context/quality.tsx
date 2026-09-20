@@ -7,7 +7,7 @@ export interface QRQualityOptions {
 
 export function QRQualityOptionsState() {
   const [options, setOptions] = useState<QRQualityOptions>({
-    ecc: 'LOW',
+    ecc: 'Low',
   });
 
   const setECC = (ecc: ECC) => {
