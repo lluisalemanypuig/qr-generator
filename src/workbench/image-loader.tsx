@@ -1,5 +1,6 @@
 import { ColorSelect } from '@components/color-select';
 import { LabelLeftAligned } from '@components/labels';
+import { RangeSelect } from '@components/range-select';
 import { ShapeSelect } from '@components/shape-select';
 import { VerticalSpace } from '@components/spaces';
 import '@css';
@@ -9,9 +10,11 @@ import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
 export function ImageLoader() {
   const {
     image,
+    setImageSize,
     setBackgroundColor,
     setBackgroundBorderColor,
     setBackgroundShape,
+    setBackgroundSize,
   } = useQRGenerator();
 
   return (
@@ -25,7 +28,7 @@ export function ImageLoader() {
         <div className="vertical">
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Image size'} />
-            <input type="range" />
+            <RangeSelect setValue={setImageSize} />
             <LabelLeftAligned text={'%'} />
           </div>
           <div className="horizontal col-3">
@@ -52,7 +55,7 @@ export function ImageLoader() {
           </div>
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background size'} />
-            <input type="range" />
+            <RangeSelect setValue={setBackgroundSize} />
             <LabelLeftAligned text={'%'} />
           </div>
         </div>
