@@ -3,6 +3,7 @@ import { ImageBackgroundShape } from '@workbench/enums/shapes';
 import { useState } from 'react';
 
 export interface QRImageOptions {
+  componentsEnabled: boolean;
   image: string | undefined; // this is not a string
   imageSize: number; // a percentage of the original image
   backgroundShape: ImageBackgroundShape;
@@ -13,6 +14,7 @@ export interface QRImageOptions {
 
 export function QRImageOptionsState() {
   const [options, setOptions] = useState<QRImageOptions>({
+    componentsEnabled: false,
     image: undefined,
     imageSize: 1,
     backgroundShape: 'None',
@@ -20,6 +22,13 @@ export function QRImageOptionsState() {
     backgroundBorderColor: 'Black',
     backgroundSize: 1,
   });
+
+  const setEnableComponents = (componentsEnabled: boolean) => {
+    setOptions((previous) => ({
+      ...previous,
+      componentsEnabled,
+    }));
+  };
 
   const setImage = (image: string | undefined) => {
     setOptions((previous) => ({
@@ -66,6 +75,7 @@ export function QRImageOptionsState() {
   return {
     options,
     setImage,
+    setEnableComponents,
     setImageSize,
     setBackgroundShape,
     setBackgroundColor,
