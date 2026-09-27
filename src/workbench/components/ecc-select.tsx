@@ -1,6 +1,6 @@
 import { ECC, ECC_VALUES } from '@workbench/enums/quality';
 
-interface ECCSelectProps {
+interface ECCSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   initialValue: string;
   setECC: (code: ECC) => void;
 }
@@ -14,9 +14,14 @@ function fromStringToECC(code: string): ECC {
   return 'Low';
 }
 
-export function ECCSelect({ initialValue, setECC }: ECCSelectProps) {
+export function ECCSelect({
+  initialValue,
+  setECC,
+  ...selectProps
+}: ECCSelectProps) {
   return (
     <select
+      {...selectProps}
       value={initialValue}
       onChange={(event) => setECC(fromStringToECC(event.target.value))}
     >

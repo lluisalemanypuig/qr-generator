@@ -10,6 +10,8 @@ import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
 export function ImageLoader() {
   const {
     image,
+    setImage: _setImage,
+    setComponentsDisabled,
     setImageSize,
     setBackgroundColor,
     setBackgroundBorderColor,
@@ -17,23 +19,37 @@ export function ImageLoader() {
     setBackgroundSize,
   } = useQRGeneratorContext();
 
+  const loadImage = () => {
+    setComponentsDisabled(false);
+  };
+
+  const removeImage = () => {
+    setComponentsDisabled(true);
+  };
+
   return (
     <>
       <VerticalSpace />
       <div className="horizontal col-1-3">
         <div className="vertical">
-          <button>Load image</button>
-          <button>Remove image</button>
+          <button onClick={loadImage}>Load image</button>
+          <button onClick={removeImage} disabled={image.componentsDisabled}>
+            Remove image
+          </button>
         </div>
         <div className="vertical">
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Image size'} />
-            <RangeSelect setValue={setImageSize} />
+            <RangeSelect
+              disabled={image.componentsDisabled}
+              setValue={setImageSize}
+            />
             <LabelLeftAligned text={'%'} />
           </div>
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background shape'} />
             <ShapeSelect
+              disabled={image.componentsDisabled}
               initialValue={image.backgroundShape}
               allValues={ALL_IMAGE_BACKGROUND_SHAPES}
               setShape={setBackgroundShape}
@@ -42,6 +58,9 @@ export function ImageLoader() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background color'} />
             <ColorSelect
+              disabled={
+                image.componentsDisabled || image.backgroundComponentsDisabled
+              }
               initialValue={image.backgroundColor}
               setColor={setBackgroundColor}
             />
@@ -49,13 +68,21 @@ export function ImageLoader() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background border color'} />
             <ColorSelect
+              disabled={
+                image.componentsDisabled || image.backgroundComponentsDisabled
+              }
               initialValue={image.backgroundBorderColor}
               setColor={setBackgroundBorderColor}
             />
           </div>
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background size'} />
-            <RangeSelect setValue={setBackgroundSize} />
+            <RangeSelect
+              disabled={
+                image.componentsDisabled || image.backgroundComponentsDisabled
+              }
+              setValue={setBackgroundSize}
+            />
             <LabelLeftAligned text={'%'} />
           </div>
         </div>

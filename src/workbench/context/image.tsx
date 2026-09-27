@@ -3,6 +3,8 @@ import { ImageBackgroundShape } from '@workbench/enums/shapes';
 import { useState } from 'react';
 
 export interface QRImageOptions {
+  componentsDisabled: boolean;
+  backgroundComponentsDisabled: boolean;
   image: string | undefined; // this is not a string
   imageSize: number; // a percentage of the original image
   backgroundShape: ImageBackgroundShape;
@@ -13,6 +15,8 @@ export interface QRImageOptions {
 
 export function QRImageOptionsState() {
   const [options, setOptions] = useState<QRImageOptions>({
+    componentsDisabled: true,
+    backgroundComponentsDisabled: true,
     image: undefined,
     imageSize: 1,
     backgroundShape: 'None',
@@ -20,6 +24,22 @@ export function QRImageOptionsState() {
     backgroundBorderColor: 'Black',
     backgroundSize: 1,
   });
+
+  const setComponentsDisabled = (componentsDisabled: boolean) => {
+    setOptions((previous) => ({
+      ...previous,
+      componentsDisabled,
+    }));
+  };
+
+  const setBackgroundComponentsDisabled = (
+    backgroundComponentsDisabled: boolean,
+  ) => {
+    setOptions((previous) => ({
+      ...previous,
+      backgroundComponentsDisabled,
+    }));
+  };
 
   const setImage = (image: string | undefined) => {
     setOptions((previous) => ({
@@ -40,6 +60,12 @@ export function QRImageOptionsState() {
       ...previous,
       backgroundShape,
     }));
+
+    if (backgroundShape === 'None') {
+      setBackgroundComponentsDisabled(true);
+    } else {
+      setBackgroundComponentsDisabled(false);
+    }
   };
 
   const setBackgroundColor = (backgroundColor: Color) => {
@@ -66,6 +92,8 @@ export function QRImageOptionsState() {
   return {
     options,
     setImage,
+    setComponentsDisabled,
+    setBackgroundComponentsDisabled,
     setImageSize,
     setBackgroundShape,
     setBackgroundColor,
