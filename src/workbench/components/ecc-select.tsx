@@ -21,7 +21,9 @@ export function ECCSelect({ initialValue, setECC }: ECCSelectProps) {
       onChange={(event) => setECC(fromStringToECC(event.target.value))}
     >
       {ECC_VALUES.map((code: ECC) => (
-        <option value={code}>{code}</option>
+        <option key={code} value={code}>
+          {code}
+        </option>
       ))}
     </select>
   );

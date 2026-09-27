@@ -26,7 +26,9 @@ export function ShapeSelect<T>({
       }
     >
       {allValues.map((shape: string) => (
-        <option value={shape}>{shape}</option>
+        <option key={shape} value={shape}>
+          {shape}
+        </option>
       ))}
     </select>
   );
