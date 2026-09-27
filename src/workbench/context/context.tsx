@@ -31,7 +31,8 @@ interface QRGeneratorContextType {
 
   image: QRImageOptions;
   setImage: (image: string | undefined) => void;
-  setEnableComponents: (v: boolean) => void;
+  setComponentsDisabled: (v: boolean) => void;
+  setBackgroundComponentsDisabled: (v: boolean) => void;
   setImageSize: (size: number) => void;
   setBackgroundShape: (shape: ImageBackgroundShape) => void;
   setBackgroundColor: (backgroundColor: Color) => void;
@@ -61,7 +62,8 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   const {
     options: imageOptions,
     setImage,
-    setEnableComponents,
+    setComponentsDisabled,
+    setBackgroundComponentsDisabled,
     setImageSize,
     setBackgroundShape,
     setBackgroundColor,
@@ -97,7 +99,8 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
         // ----
         image: imageOptions,
         setImage,
-        setEnableComponents,
+        setComponentsDisabled,
+        setBackgroundComponentsDisabled,
         setImageSize,
         setBackgroundShape,
         setBackgroundColor,
