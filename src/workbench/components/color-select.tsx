@@ -21,7 +21,9 @@ export function ColorSelect({ initialValue, setColor }: ColorSelectProps) {
       onChange={(event) => setColor(fromStringToColor(event.target.value))}
     >
       {COLORS.map((color: Color) => (
-        <option value={color}>{color}</option>
+        <option key={color} value={color}>
+          {color}
+        </option>
       ))}
     </select>
   );
