@@ -1,8 +1,9 @@
+import { isNotDefined } from '@utils/defined';
 import { Color } from '@workbench/enums/colors';
 import { ImageBackgroundShape } from '@workbench/enums/shapes';
-import { useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
-export interface QRImageOptions {
+interface ImageOptions {
   componentsDisabled: boolean;
   backgroundComponentsDisabled: boolean;
   image: string | undefined; // this is not a string
@@ -13,8 +14,22 @@ export interface QRImageOptions {
   backgroundSize: number;
 }
 
-export function QRImageOptionsState() {
-  const [options, setOptions] = useState<QRImageOptions>({
+interface Image {
+  options: ImageOptions;
+  setImage: (image: string | undefined) => void;
+  setComponentsDisabled: (v: boolean) => void;
+  setBackgroundComponentsDisabled: (v: boolean) => void;
+  setImageSize: (size: number) => void;
+  setBackgroundShape: (shape: ImageBackgroundShape) => void;
+  setBackgroundColor: (backgroundColor: Color) => void;
+  setBackgroundBorderColor: (backgroundBorderColor: Color) => void;
+  setBackgroundSize: (size: number) => void;
+}
+
+const ImageContext = createContext<Image | null>(null);
+
+export function ImageProvider({ children }: { children: ReactNode }) {
+  const [options, setOptions] = useState<ImageOptions>({
     componentsDisabled: true,
     backgroundComponentsDisabled: true,
     image: undefined,
@@ -89,15 +104,31 @@ export function QRImageOptionsState() {
     }));
   };
 
-  return {
-    options,
-    setImage,
-    setComponentsDisabled,
-    setBackgroundComponentsDisabled,
-    setImageSize,
-    setBackgroundShape,
-    setBackgroundColor,
-    setBackgroundBorderColor,
-    setBackgroundSize,
-  };
+  return (
+    <ImageContext.Provider
+      value={{
+        options,
+        setImage,
+        setComponentsDisabled,
+        setBackgroundComponentsDisabled,
+        setImageSize,
+        setBackgroundShape,
+        setBackgroundColor,
+        setBackgroundBorderColor,
+        setBackgroundSize,
+      }}
+    >
+      {children}
+    </ImageContext.Provider>
+  );
+}
+
+export function useImageContext() {
+  const context = useContext(ImageContext);
+
+  if (isNotDefined(context)) {
+    throw new Error('useImageContext must be used inside ImageContext');
+  }
+
+  return context;
 }

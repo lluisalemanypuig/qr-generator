@@ -1,77 +1,24 @@
 import { isNotDefined } from '@utils/defined';
 import {
-  QRColorAndShapeOptions,
-  QRColorAndShapeOptionsState,
+  ColorAndShapeProvider,
+  useColorAndShapeContext,
 } from '@workbench/context/color-shape';
-import { QRImageOptions, QRImageOptionsState } from '@workbench/context/image';
-import {
-  QRQualityOptions,
-  QRQualityOptionsState,
-} from '@workbench/context/quality';
-import { Color } from '@workbench/enums/colors';
-import { ECC } from '@workbench/enums/quality';
-import {
-  AlignmentShape,
-  ImageBackgroundShape,
-  PointShape,
-} from '@workbench/enums/shapes';
+import { ImageProvider, useImageContext } from '@workbench/context/image';
+import { QualityProvider, useQualityContext } from '@workbench/context/quality';
 import { createContext, ReactNode, useContext, useEffect } from 'react';
-import { TextOptions, TextOptionsState } from './text';
+import { TextProvider, useTextContext } from './text';
 
-interface QRGeneratorContextType {
-  text: TextOptions;
-  setText: (s: string) => void;
-
-  colorAndShape: QRColorAndShapeOptions;
-  setFillColor: (color: Color) => void;
-  setBorderColor: (color: Color) => void;
-  setPointShape: (shape: PointShape) => void;
-  setAlignmentShape: (shape: AlignmentShape) => void;
-  setTransparentBackground: (transparent: boolean) => void;
-
-  image: QRImageOptions;
-  setImage: (image: string | undefined) => void;
-  setComponentsDisabled: (v: boolean) => void;
-  setBackgroundComponentsDisabled: (v: boolean) => void;
-  setImageSize: (size: number) => void;
-  setBackgroundShape: (shape: ImageBackgroundShape) => void;
-  setBackgroundColor: (backgroundColor: Color) => void;
-  setBackgroundBorderColor: (backgroundBorderColor: Color) => void;
-  setBackgroundSize: (size: number) => void;
-
-  quality: QRQualityOptions;
-  setECC: (ecc: ECC) => void;
-
+interface GeneratorContextType {
   generateQR: () => void;
 }
 
-const QRGeneratorContext = createContext<QRGeneratorContextType | null>(null);
+const GeneratorContext = createContext<GeneratorContextType | null>(null);
 
-export function QRGeneratorProvider({ children }: { children: ReactNode }) {
-  const { options: textOptions, setText } = TextOptionsState();
-
-  const {
-    options: colorAndShapeOptions,
-    setFillColor,
-    setBorderColor,
-    setPointShape,
-    setAlignmentShape,
-    setTransparentBackground,
-  } = QRColorAndShapeOptionsState();
-
-  const {
-    options: imageOptions,
-    setImage,
-    setComponentsDisabled,
-    setBackgroundComponentsDisabled,
-    setImageSize,
-    setBackgroundShape,
-    setBackgroundColor,
-    setBackgroundBorderColor,
-    setBackgroundSize,
-  } = QRImageOptionsState();
-
-  const { options: qualityOptions, setECC } = QRQualityOptionsState();
+function GeneratorProvider({ children }: { children: ReactNode }) {
+  const { options: textOptions } = useTextContext();
+  const { options: colorAndShapeOptions } = useColorAndShapeContext();
+  const { options: imageOptions } = useImageContext();
+  const { options: qualityOptions } = useQualityContext();
 
   const generateQR = () => {
     console.log(
@@ -84,45 +31,38 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
   }, [textOptions, colorAndShapeOptions, imageOptions, qualityOptions]);
 
   return (
-    <QRGeneratorContext.Provider
+    <GeneratorContext.Provider
       value={{
-        // ----
-        text: textOptions,
-        setText,
-        // ----
-        colorAndShape: colorAndShapeOptions,
-        setFillColor,
-        setBorderColor,
-        setPointShape,
-        setAlignmentShape,
-        setTransparentBackground,
-        // ----
-        image: imageOptions,
-        setImage,
-        setComponentsDisabled,
-        setBackgroundComponentsDisabled,
-        setImageSize,
-        setBackgroundShape,
-        setBackgroundColor,
-        setBackgroundBorderColor,
-        setBackgroundSize,
-        // ----
-        quality: qualityOptions,
-        setECC,
         generateQR,
       }}
     >
       {children}
-    </QRGeneratorContext.Provider>
+    </GeneratorContext.Provider>
   );
 }
 
-export function useQRGeneratorContext() {
-  const context = useContext(QRGeneratorContext);
+export function useGeneratorContext() {
+  const context = useContext(GeneratorContext);
 
   if (isNotDefined(context)) {
-    throw new Error('useQRGenerator must be used inside QRGeneratorProvider');
+    throw new Error(
+      'useGeneratorContext must be used inside GeneratorProvider',
+    );
   }
 
   return context;
+}
+
+export function Generator({ children }: { children: ReactNode }) {
+  return (
+    <TextProvider>
+      <ColorAndShapeProvider>
+        <ImageProvider>
+          <QualityProvider>
+            <GeneratorProvider>{children}</GeneratorProvider>
+          </QualityProvider>
+        </ImageProvider>
+      </ColorAndShapeProvider>
+    </TextProvider>
+  );
 }

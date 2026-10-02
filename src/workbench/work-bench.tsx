@@ -1,9 +1,9 @@
 import { isNotDefined } from '@utils/defined';
 import { ColorShape } from '@workbench/color-shape';
-import { InputText } from '@workbench/components/input-text';
 import { LabelLeftAligned } from '@workbench/components/labels';
-import { QRGeneratorProvider } from '@workbench/context/context';
+import { Generator } from '@workbench/context/context';
 import { ImageLoader } from '@workbench/image-loader';
+import { InputText } from '@workbench/input-text';
 import { QRQualityVersion } from '@workbench/qr-quality-version';
 import { Canvas } from 'fabric';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
@@ -76,8 +76,8 @@ function ControlPanel({ canvasRef }: WorkbenchProps) {
 
 export function WorkBench({ canvasRef }: WorkbenchProps) {
   return (
-    <QRGeneratorProvider>
+    <Generator>
       <ControlPanel canvasRef={canvasRef} />
-    </QRGeneratorProvider>
+    </Generator>
   );
 }

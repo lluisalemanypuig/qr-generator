@@ -1,12 +1,20 @@
+import { isNotDefined } from '@utils/defined';
 import { ECC } from '@workbench/enums/quality';
-import { useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
-export interface QRQualityOptions {
+interface QualityOptions {
   ecc: ECC;
 }
 
-export function QRQualityOptionsState() {
-  const [options, setOptions] = useState<QRQualityOptions>({
+interface Quality {
+  options: QualityOptions;
+  setECC: (ecc: ECC) => void;
+}
+
+const QualityContext = createContext<Quality | null>(null);
+
+export function QualityProvider({ children }: { children: ReactNode }) {
+  const [options, setOptions] = useState<QualityOptions>({
     ecc: 'Low',
   });
 
@@ -17,5 +25,24 @@ export function QRQualityOptionsState() {
     }));
   };
 
-  return { options, setECC };
+  return (
+    <QualityContext.Provider
+      value={{
+        options,
+        setECC,
+      }}
+    >
+      {children}
+    </QualityContext.Provider>
+  );
+}
+
+export function useQualityContext() {
+  const context = useContext(QualityContext);
+
+  if (isNotDefined(context)) {
+    throw new Error('useQualityContext must be used inside QualityContext');
+  }
+
+  return context;
 }

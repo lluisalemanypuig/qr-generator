@@ -3,21 +3,21 @@ import { ColorSelect } from '@workbench/components/color-select';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { ShapeSelect } from '@workbench/components/shape-select';
 import { VerticalSpace } from '@workbench/components/spaces';
-import { useQRGeneratorContext } from '@workbench/context/context';
 import {
   ALL_ALIGNMENT_SHAPES,
   ALL_POINT_SHAPES,
 } from '@workbench/enums/shapes';
+import { useColorAndShapeContext } from './context/color-shape';
 
 export function ColorShape() {
   const {
-    colorAndShape,
+    options,
     setFillColor,
     setBorderColor,
     setPointShape,
     setAlignmentShape,
     setTransparentBackground,
-  } = useQRGeneratorContext();
+  } = useColorAndShapeContext();
 
   return (
     <>
@@ -26,12 +26,12 @@ export function ColorShape() {
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Fill color'} />
           <ColorSelect
-            initialValue={colorAndShape.fillColor}
+            initialValue={options.fillColor}
             setColor={setFillColor}
           />
           <LabelLeftAligned text={'Point shape'} />
           <ShapeSelect
-            initialValue={colorAndShape.pointShape}
+            initialValue={options.pointShape}
             allValues={ALL_POINT_SHAPES}
             setShape={setPointShape}
           />
@@ -39,12 +39,12 @@ export function ColorShape() {
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Border color'} />
           <ColorSelect
-            initialValue={colorAndShape.borderColor}
+            initialValue={options.borderColor}
             setColor={setBorderColor}
           />
           <LabelLeftAligned text={'Alignment shape'} />
           <ShapeSelect
-            initialValue={colorAndShape.alignmentShape}
+            initialValue={options.alignmentShape}
             allValues={ALL_ALIGNMENT_SHAPES}
             setShape={setAlignmentShape}
           />

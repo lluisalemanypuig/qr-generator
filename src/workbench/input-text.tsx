@@ -1,7 +1,7 @@
-import { useQRGeneratorContext } from '@workbench/context/context';
+import { useTextContext } from '@workbench/context/text';
 
 export function InputText() {
-  const { text, setText } = useQRGeneratorContext();
+  const { options: _options, setText } = useTextContext();
 
   return (
     <input
