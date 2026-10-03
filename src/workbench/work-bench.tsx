@@ -1,14 +1,22 @@
 import { LabelLeftAligned } from '@workbench/components/labels';
-import { Generator, useGeneratorContext } from '@workbench/context/context';
+import { ColorAndShapeProvider } from '@workbench/context/color-shape';
+import {
+  GeneratorProvider,
+  useGeneratorContext,
+} from '@workbench/context/context';
+import { ImageProvider } from '@workbench/context/image';
+import { QualityProvider } from '@workbench/context/quality';
+import { TextProvider } from '@workbench/context/text';
 import { InputText } from '@workbench/input-text';
 import { ColorShapePanel } from '@workbench/panels/color-shape';
 import { ImageLoaderPanel } from '@workbench/panels/image-loader';
 import { QualityPanel } from '@workbench/panels/quality';
 import { Canvas } from 'fabric';
+import { PropsWithChildren } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 function ControlPanel() {
-  const { downloadSvg: downloadQR } = useGeneratorContext();
+  const { downloadSvg } = useGeneratorContext();
 
   return (
     <div className="vertical">
@@ -17,7 +25,7 @@ function ControlPanel() {
         <InputText />
       </div>
       <div>
-        <button onClick={downloadQR} style={{ float: 'right' }}>
+        <button onClick={downloadSvg} style={{ float: 'right' }}>
           Download QR
         </button>
       </div>
@@ -45,14 +53,22 @@ function ControlPanel() {
   );
 }
 
-interface WorkbenchProps {
+interface WorkbenchProps extends PropsWithChildren {
   canvas: React.RefObject<Canvas | null>;
 }
 
-export function WorkBench({ canvas: canvasRef }: WorkbenchProps) {
+export function WorkBench({ canvas }: WorkbenchProps) {
   return (
-    <Generator canvas={canvasRef}>
-      <ControlPanel />
-    </Generator>
+    <GeneratorProvider canvasRef={canvas}>
+      <ColorAndShapeProvider>
+        <ImageProvider>
+          <QualityProvider>
+            <TextProvider>
+              <ControlPanel />
+            </TextProvider>
+          </QualityProvider>
+        </ImageProvider>
+      </ColorAndShapeProvider>
+    </GeneratorProvider>
   );
 }

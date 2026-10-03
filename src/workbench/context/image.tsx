@@ -1,18 +1,8 @@
 import { isNotDefined } from '@utils/defined';
 import { Color } from '@workbench/enums/colors';
 import { ImageBackgroundShape } from '@workbench/enums/shapes';
+import { ImageOptions } from '@workbench/options/image';
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface ImageOptions {
-  componentsDisabled: boolean;
-  backgroundComponentsDisabled: boolean;
-  image: string | undefined; // this is not a string
-  imageSize: number; // a percentage of the original image
-  backgroundShape: ImageBackgroundShape;
-  backgroundColor: Color;
-  backgroundBorderColor: Color;
-  backgroundSize: number;
-}
 
 interface Image {
   options: ImageOptions;

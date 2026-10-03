@@ -1,10 +1,7 @@
 import { isNotDefined } from '@utils/defined';
 import { ECC } from '@workbench/enums/quality';
+import { QualityOptions } from '@workbench/options/quality';
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface QualityOptions {
-  ecc: ECC;
-}
 
 interface Quality {
   options: QualityOptions;
