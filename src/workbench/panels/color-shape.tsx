@@ -7,7 +7,7 @@ import {
   ALL_ALIGNMENT_SHAPES,
   ALL_POINT_SHAPES,
 } from '@workbench/enums/shapes';
-import { useColorAndShapeContext } from './context/color-shape';
+import { useColorAndShapeContext } from '../context/color-shape';
 
 export function ColorShapePanel() {
   const {

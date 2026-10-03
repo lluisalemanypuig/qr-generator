@@ -1,7 +1,7 @@
 import { ECCSelect } from '@workbench/components/ecc-select';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { VerticalSpace } from '@workbench/components/spaces';
-import { useQualityContext } from './context/quality';
+import { useQualityContext } from '../context/quality';
 
 export function QualityPanel() {
   const { options, setECC } = useQualityContext();

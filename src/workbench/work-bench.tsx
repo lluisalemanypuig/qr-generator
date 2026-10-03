@@ -2,9 +2,9 @@ import { isNotDefined } from '@utils/defined';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { Generator } from '@workbench/context/context';
 import { InputText } from '@workbench/input-text';
-import { ColorShapePanel } from '@workbench/panel-color-shape';
-import { ImageLoaderPanel } from '@workbench/panel-image-loader';
-import { QualityPanel } from '@workbench/panel-quality';
+import { ColorShapePanel } from '@workbench/panels/color-shape';
+import { ImageLoaderPanel } from '@workbench/panels/image-loader';
+import { QualityPanel } from '@workbench/panels/quality';
 import { Canvas } from 'fabric';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 

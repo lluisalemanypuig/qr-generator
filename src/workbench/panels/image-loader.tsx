@@ -5,7 +5,7 @@ import { RangeSelect } from '@workbench/components/range-select';
 import { ShapeSelect } from '@workbench/components/shape-select';
 import { VerticalSpace } from '@workbench/components/spaces';
 import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
-import { useImageContext } from './context/image';
+import { useImageContext } from '../context/image';
 
 export function ImageLoaderPanel() {
   const {
