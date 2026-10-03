@@ -1,5 +1,6 @@
 import { isNotDefined } from '@utils/defined';
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { useGeneratorContext } from './context';
 
 interface TextOptions {
   text: string;
@@ -13,6 +14,8 @@ interface Text {
 const TextContext = createContext<Text | null>(null);
 
 export function TextProvider({ children }: { children: ReactNode }) {
+  const { generateQrFromText } = useGeneratorContext();
+
   const [options, setOptions] = useState<TextOptions>({
     text: '',
   });
@@ -22,6 +25,7 @@ export function TextProvider({ children }: { children: ReactNode }) {
       ...previous,
       text,
     }));
+    generateQrFromText(text);
   };
 
   return (
