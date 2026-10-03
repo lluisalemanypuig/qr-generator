@@ -23,12 +23,14 @@ interface GeneratorProviderProps extends PropsWithChildren {
 }
 
 function GeneratorProvider({ children, canvasRef }: GeneratorProviderProps) {
+  const refreshCanvas = useRefreshCanvas(canvasRef);
+
   return (
     <GeneratorContext.Provider
       value={{
         canvasRef,
-        generateQrFromText: useRenderCanvasFromtext(canvasRef),
-        refreshCanvas: useRefreshCanvas(canvasRef),
+        generateQrFromText: useRenderCanvasFromtext(canvasRef, refreshCanvas),
+        refreshCanvas: refreshCanvas,
         downloadSvg: useDownloadSvg(canvasRef),
       }}
     >
