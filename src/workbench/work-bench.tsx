@@ -1,10 +1,10 @@
 import { isNotDefined } from '@utils/defined';
-import { ColorShape } from '@workbench/color-shape';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { Generator } from '@workbench/context/context';
-import { ImageLoader } from '@workbench/image-loader';
 import { InputText } from '@workbench/input-text';
-import { QRQualityVersion } from '@workbench/qr-quality-version';
+import { ColorShapePanel } from '@workbench/panel-color-shape';
+import { ImageLoaderPanel } from '@workbench/panel-image-loader';
+import { QualityPanel } from '@workbench/panel-quality';
 import { Canvas } from 'fabric';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
@@ -60,13 +60,13 @@ function ControlPanel({ canvasRef }: WorkbenchProps) {
           </TabList>
 
           <TabPanel>
-            <ColorShape />
+            <ColorShapePanel />
           </TabPanel>
           <TabPanel>
-            <ImageLoader />
+            <ImageLoaderPanel />
           </TabPanel>
           <TabPanel>
-            <QRQualityVersion />
+            <QualityPanel />
           </TabPanel>
         </Tabs>
       </div>

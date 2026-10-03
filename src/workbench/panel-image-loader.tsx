@@ -7,7 +7,7 @@ import { VerticalSpace } from '@workbench/components/spaces';
 import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
 import { useImageContext } from './context/image';
 
-export function ImageLoader() {
+export function ImageLoaderPanel() {
   const {
     options,
     setImage: _setImage,

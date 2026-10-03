@@ -9,7 +9,7 @@ import {
 } from '@workbench/enums/shapes';
 import { useColorAndShapeContext } from './context/color-shape';
 
-export function ColorShape() {
+export function ColorShapePanel() {
   const {
     options,
     setFillColor,

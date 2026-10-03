@@ -3,7 +3,7 @@ import { LabelLeftAligned } from '@workbench/components/labels';
 import { VerticalSpace } from '@workbench/components/spaces';
 import { useQualityContext } from './context/quality';
 
-export function QRQualityVersion() {
+export function QualityPanel() {
   const { options, setECC } = useQualityContext();
 
   return (
