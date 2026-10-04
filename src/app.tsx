@@ -12,6 +12,27 @@ export function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fabricRef = useRef<Canvas | null>(null);
 
+  const rectangles: Rect[] = [
+    new Rect({
+      width: CANVAS_WIDTH - 20,
+      height: CANVAS_HEIGHT - 20,
+      fill: 'rgba(255, 0, 0, 0.5)',
+      rx: 10,
+      ry: 10,
+      selectable: false,
+    }),
+    new Rect({
+      width: CANVAS_WIDTH - 50,
+      height: CANVAS_HEIGHT - 50,
+      fill: 'rgba(255, 0, 255, 0.5)',
+      rx: 10,
+      ry: 10,
+      selectable: false,
+    }),
+  ];
+  rectangles[0].setPositionByOrigin(new Point(10, 10), 'left', 'top');
+  rectangles[1].setPositionByOrigin(new Point(25, 25), 'left', 'top');
+
   useEffect(() => {
     if (isNotDefined(canvasRef.current)) {
       return;
@@ -25,17 +46,6 @@ export function App() {
 
     fabricRef.current = canvas;
 
-    // Add some objects
-    const rectangle = new Rect({
-      width: CANVAS_WIDTH - 20,
-      height: CANVAS_HEIGHT - 20,
-      fill: 'rgba(255, 0, 0, 0.5)',
-      rx: 10,
-      ry: 10,
-      selectable: false,
-    });
-    rectangle.setPositionByOrigin(new Point(10, 10), 'left', 'top');
-
     const circle = new Circle({
       left: 400,
       top: 150,
@@ -44,7 +54,7 @@ export function App() {
       selectable: false,
     });
 
-    canvas.add(rectangle, circle);
+    canvas.add(...rectangles, circle);
     canvas.renderAll();
 
     // Cleanup
@@ -60,7 +70,7 @@ export function App() {
         <canvas ref={canvasRef} />
       </div>
 
-      <WorkBench canvasRef={fabricRef} />
+      <WorkBench canvas={fabricRef} />
     </div>
   );
 }

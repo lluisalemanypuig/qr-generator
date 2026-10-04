@@ -1,15 +1,8 @@
 import { isNotDefined } from '@utils/defined';
 import { Color } from '@workbench/enums/colors';
 import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
+import { ColorAndShapeOptions } from '@workbench/options/color-shape';
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface ColorAndShapeOptions {
-  fillColor: Color;
-  borderColor: Color;
-  pointShape: PointShape;
-  alignmentShape: AlignmentShape;
-  transparentBackground: boolean;
-}
 
 interface ColorAndShape {
   options: ColorAndShapeOptions;

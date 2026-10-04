@@ -1,43 +1,22 @@
-import { isNotDefined } from '@utils/defined';
 import { LabelLeftAligned } from '@workbench/components/labels';
-import { Generator } from '@workbench/context/context';
+import { ColorAndShapeProvider } from '@workbench/context/color-shape';
+import {
+  GeneratorProvider,
+  useGeneratorContext,
+} from '@workbench/context/context';
+import { ImageProvider } from '@workbench/context/image';
+import { QualityProvider } from '@workbench/context/quality';
+import { TextProvider } from '@workbench/context/text';
 import { InputText } from '@workbench/input-text';
 import { ColorShapePanel } from '@workbench/panels/color-shape';
 import { ImageLoaderPanel } from '@workbench/panels/image-loader';
 import { QualityPanel } from '@workbench/panels/quality';
 import { Canvas } from 'fabric';
+import { PropsWithChildren } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-function useDownloadSvg(fabricRef: React.RefObject<Canvas | null>) {
-  return () => {
-    const canvas = fabricRef.current;
-    if (isNotDefined(canvas)) {
-      return;
-    }
-
-    const svg = canvas.toSVG();
-
-    const blob = new Blob([svg], {
-      type: 'image/svg+xml;charset=utf-8',
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'canvas.svg';
-    link.click();
-
-    URL.revokeObjectURL(url);
-  };
-}
-
-interface WorkbenchProps {
-  canvasRef: React.RefObject<Canvas | null>;
-}
-
-function ControlPanel({ canvasRef }: WorkbenchProps) {
-  const downloadSvg = useDownloadSvg(canvasRef);
+function ControlPanel() {
+  const { downloadSvg } = useGeneratorContext();
 
   return (
     <div className="vertical">
@@ -74,10 +53,22 @@ function ControlPanel({ canvasRef }: WorkbenchProps) {
   );
 }
 
-export function WorkBench({ canvasRef }: WorkbenchProps) {
+interface WorkbenchProps extends PropsWithChildren {
+  canvas: React.RefObject<Canvas | null>;
+}
+
+export function WorkBench({ canvas }: WorkbenchProps) {
   return (
-    <Generator>
-      <ControlPanel canvasRef={canvasRef} />
-    </Generator>
+    <GeneratorProvider canvasRef={canvas}>
+      <ColorAndShapeProvider>
+        <ImageProvider>
+          <QualityProvider>
+            <TextProvider>
+              <ControlPanel />
+            </TextProvider>
+          </QualityProvider>
+        </ImageProvider>
+      </ColorAndShapeProvider>
+    </GeneratorProvider>
   );
 }

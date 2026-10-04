@@ -1,39 +1,47 @@
 import { isNotDefined } from '@utils/defined';
+import { CanvasRef } from '@utils/types';
+import { useDownloadSvg } from '@workbench/actions/download';
 import {
-  ColorAndShapeProvider,
-  useColorAndShapeContext,
-} from '@workbench/context/color-shape';
-import { ImageProvider, useImageContext } from '@workbench/context/image';
-import { QualityProvider, useQualityContext } from '@workbench/context/quality';
-import { createContext, ReactNode, useContext, useEffect } from 'react';
-import { TextProvider, useTextContext } from './text';
+  useRefreshCanvas,
+  useRenderCanvasFromtext,
+} from '@workbench/actions/render';
+import { ColorAndShapeOptions } from '@workbench/options/color-shape';
+import { ImageOptions } from '@workbench/options/image';
+import { QualityOptions } from '@workbench/options/quality';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 interface GeneratorContextType {
-  generateQR: () => void;
+  canvasRef: CanvasRef;
+
+  generateQrFromText: (
+    t: string,
+    colorAndShape: ColorAndShapeOptions,
+    image: ImageOptions,
+    quality: QualityOptions,
+  ) => void;
+  refreshCanvas: () => void;
+  downloadSvg: () => void;
 }
 
 const GeneratorContext = createContext<GeneratorContextType | null>(null);
 
-function GeneratorProvider({ children }: { children: ReactNode }) {
-  const { options: textOptions } = useTextContext();
-  const { options: colorAndShapeOptions } = useColorAndShapeContext();
-  const { options: imageOptions } = useImageContext();
-  const { options: qualityOptions } = useQualityContext();
+interface GeneratorProviderProps extends PropsWithChildren {
+  canvasRef: CanvasRef;
+}
 
-  const generateQR = () => {
-    console.log(
-      `Generating QR: ${textOptions.text}, ${colorAndShapeOptions.fillColor}`,
-    );
-  };
-
-  useEffect(() => {
-    generateQR();
-  }, [textOptions, colorAndShapeOptions, imageOptions, qualityOptions]);
+export function GeneratorProvider({
+  children,
+  canvasRef,
+}: GeneratorProviderProps) {
+  const refreshCanvas = useRefreshCanvas(canvasRef);
 
   return (
     <GeneratorContext.Provider
       value={{
-        generateQR,
+        canvasRef,
+        generateQrFromText: useRenderCanvasFromtext(canvasRef, refreshCanvas),
+        refreshCanvas: refreshCanvas,
+        downloadSvg: useDownloadSvg(canvasRef),
       }}
     >
       {children}
@@ -51,18 +59,4 @@ export function useGeneratorContext() {
   }
 
   return context;
-}
-
-export function Generator({ children }: { children: ReactNode }) {
-  return (
-    <TextProvider>
-      <ColorAndShapeProvider>
-        <ImageProvider>
-          <QualityProvider>
-            <GeneratorProvider>{children}</GeneratorProvider>
-          </QualityProvider>
-        </ImageProvider>
-      </ColorAndShapeProvider>
-    </TextProvider>
-  );
 }

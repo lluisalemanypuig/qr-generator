@@ -3,11 +3,11 @@ import { ColorSelect } from '@workbench/components/color-select';
 import { LabelLeftAligned } from '@workbench/components/labels';
 import { ShapeSelect } from '@workbench/components/shape-select';
 import { VerticalSpace } from '@workbench/components/spaces';
+import { useColorAndShapeContext } from '@workbench/context/color-shape';
 import {
   ALL_ALIGNMENT_SHAPES,
   ALL_POINT_SHAPES,
 } from '@workbench/enums/shapes';
-import { useColorAndShapeContext } from '../context/color-shape';
 
 export function ColorShapePanel() {
   const {
