@@ -3,6 +3,7 @@ import { Color } from '@workbench/enums/colors';
 import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
 import { ColorAndShapeOptions } from '@workbench/options/color-shape';
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { useGeneratorPipelineContext } from './generator-pipeline';
 
 interface ColorAndShape {
   options: ColorAndShapeOptions;
@@ -16,6 +17,14 @@ interface ColorAndShape {
 const ColorAndShapeContext = createContext<ColorAndShape | null>(null);
 
 export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
+  const {
+    updateFillColor,
+    updateBorderColor,
+    updatePointShape,
+    updateAlignmentShape,
+    updateBackgroundTransparency,
+  } = useGeneratorPipelineContext();
+
   const [options, setOptions] = useState<ColorAndShapeOptions>({
     fillColor: 'Black',
     borderColor: 'Black',
@@ -29,6 +38,7 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
       ...previous,
       fillColor,
     }));
+    updateFillColor(fillColor);
   };
 
   const setBorderColor = (borderColor: Color) => {
@@ -36,6 +46,7 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
       ...previous,
       borderColor,
     }));
+    updateBorderColor(borderColor);
   };
 
   const setPointShape = (pointShape: PointShape) => {
@@ -43,6 +54,7 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
       ...previous,
       pointShape,
     }));
+    updatePointShape(pointShape);
   };
 
   const setAlignmentShape = (alignmentShape: AlignmentShape) => {
@@ -50,6 +62,7 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
       ...previous,
       alignmentShape,
     }));
+    updateAlignmentShape(alignmentShape);
   };
 
   const setTransparentBackground = (transparentBackground: boolean) => {
@@ -57,6 +70,7 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
       ...previous,
       transparentBackground,
     }));
+    updateBackgroundTransparency(transparentBackground);
   };
 
   return (

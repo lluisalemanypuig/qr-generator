@@ -1,10 +1,19 @@
 import { isNotDefined } from '@utils/defined';
 import { CanvasRef } from '@utils/types';
+import {
+  useUpdateAlignmentShape,
+  useUpdateBackgroundTransparency,
+  useUpdateBorderColor,
+  useUpdateFillColor,
+  useUpdatePointShape,
+} from '@workbench/actions/colors';
 import { useDownloadSvg } from '@workbench/actions/download';
 import {
+  useGenerateCanvasFromtext,
   useRefreshCanvas,
-  useRenderCanvasFromtext,
 } from '@workbench/actions/render';
+import { Color } from '@workbench/enums/colors';
+import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
 import { ColorAndShapeOptions } from '@workbench/options/color-shape';
 import { ImageOptions } from '@workbench/options/image';
 import { QualityOptions } from '@workbench/options/quality';
@@ -21,6 +30,12 @@ interface GeneratorPipelineContextType {
   ) => void;
   refreshCanvas: () => void;
   downloadSvg: () => void;
+
+  updateFillColor: (c: Color) => void;
+  updateBorderColor: (c: Color) => void;
+  updatePointShape: (s: PointShape) => void;
+  updateAlignmentShape: (s: AlignmentShape) => void;
+  updateBackgroundTransparency: (t: boolean) => void;
 }
 
 const GeneratorPipelineContext =
@@ -40,9 +55,17 @@ export function GeneratorPipelineProvider({
     <GeneratorPipelineContext.Provider
       value={{
         canvasRef,
-        generateQrFromText: useRenderCanvasFromtext(canvasRef, refreshCanvas),
+        generateQrFromText: useGenerateCanvasFromtext(canvasRef, refreshCanvas),
         refreshCanvas: refreshCanvas,
         downloadSvg: useDownloadSvg(canvasRef),
+        updateFillColor: useUpdateFillColor(canvasRef, refreshCanvas),
+        updateBorderColor: useUpdateBorderColor(canvasRef, refreshCanvas),
+        updatePointShape: useUpdatePointShape(canvasRef, refreshCanvas),
+        updateAlignmentShape: useUpdateAlignmentShape(canvasRef, refreshCanvas),
+        updateBackgroundTransparency: useUpdateBackgroundTransparency(
+          canvasRef,
+          refreshCanvas,
+        ),
       }}
     >
       {children}
