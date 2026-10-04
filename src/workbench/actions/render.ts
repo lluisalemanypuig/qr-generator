@@ -4,7 +4,7 @@ import { ColorAndShapeOptions } from '@workbench/options/color-shape';
 import { ImageOptions } from '@workbench/options/image';
 import { QualityOptions } from '@workbench/options/quality';
 
-export function useRenderCanvasFromtext(
+export function useGenerateCanvasFromtext(
   canvasRef: CanvasRef,
   refreshCanvas: () => void,
 ) {
@@ -15,7 +15,11 @@ export function useRenderCanvasFromtext(
     quality: QualityOptions,
   ) => {
     console.log(`Rendering full QR with text '${text}'`);
-    console.log(`   Fill color: ${colorAndShape.fillColor}`);
+    console.log(`   Fill color:      ${colorAndShape.fillColor}`);
+    console.log(`   Border color:    ${colorAndShape.borderColor}`);
+    console.log(`   Point shape:     ${colorAndShape.pointShape}`);
+    console.log(`   Alignment shape: ${colorAndShape.alignmentShape}`);
+    console.log(`   Transparency:    ${colorAndShape.transparentBackground}`);
     refreshCanvas();
   };
 }
