@@ -10,11 +10,11 @@ import { ImageOptions } from '@workbench/options/image';
 import { QualityOptions } from '@workbench/options/quality';
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-interface GeneratorContextType {
+interface GeneratorPipelineContextType {
   canvasRef: CanvasRef;
 
   generateQrFromText: (
-    t: string,
+    text: string,
     colorAndShape: ColorAndShapeOptions,
     image: ImageOptions,
     quality: QualityOptions,
@@ -23,20 +23,21 @@ interface GeneratorContextType {
   downloadSvg: () => void;
 }
 
-const GeneratorContext = createContext<GeneratorContextType | null>(null);
+const GeneratorPipelineContext =
+  createContext<GeneratorPipelineContextType | null>(null);
 
 interface GeneratorProviderProps extends PropsWithChildren {
   canvasRef: CanvasRef;
 }
 
-export function GeneratorProvider({
+export function GeneratorPipelineProvider({
   children,
   canvasRef,
 }: GeneratorProviderProps) {
   const refreshCanvas = useRefreshCanvas(canvasRef);
 
   return (
-    <GeneratorContext.Provider
+    <GeneratorPipelineContext.Provider
       value={{
         canvasRef,
         generateQrFromText: useRenderCanvasFromtext(canvasRef, refreshCanvas),
@@ -45,12 +46,12 @@ export function GeneratorProvider({
       }}
     >
       {children}
-    </GeneratorContext.Provider>
+    </GeneratorPipelineContext.Provider>
   );
 }
 
-export function useGeneratorContext() {
-  const context = useContext(GeneratorContext);
+export function useGeneratorPipelineContext() {
+  const context = useContext(GeneratorPipelineContext);
 
   if (isNotDefined(context)) {
     throw new Error(

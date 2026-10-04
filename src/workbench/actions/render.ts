@@ -15,6 +15,7 @@ export function useRenderCanvasFromtext(
     quality: QualityOptions,
   ) => {
     console.log(`Rendering full QR with text '${text}'`);
+    console.log(`   Fill color: ${colorAndShape.fillColor}`);
     refreshCanvas();
   };
 }
