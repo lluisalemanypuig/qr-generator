@@ -1,34 +1,19 @@
-import { LabelLeftAligned } from '@workbench/components/labels';
 import { ColorAndShapeProvider } from '@workbench/context/color-shape';
-import {
-  GeneratorProvider,
-  useGeneratorContext,
-} from '@workbench/context/context';
+import { GeneratorPipelineProvider } from '@workbench/context/generator-pipeline';
 import { ImageProvider } from '@workbench/context/image';
 import { QualityProvider } from '@workbench/context/quality';
-import { TextProvider } from '@workbench/context/text';
-import { InputText } from '@workbench/input-text';
 import { ColorShapePanel } from '@workbench/panels/color-shape';
 import { ImageLoaderPanel } from '@workbench/panels/image-loader';
 import { QualityPanel } from '@workbench/panels/quality';
+import { TextPanel } from '@workbench/panels/text-panel';
 import { Canvas } from 'fabric';
 import { PropsWithChildren } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 function ControlPanel() {
-  const { downloadSvg } = useGeneratorContext();
-
   return (
     <div className="vertical">
-      <LabelLeftAligned text={'Encode text into a QR:'} />
-      <div className="horizontal">
-        <InputText />
-      </div>
-      <div>
-        <button onClick={downloadSvg} style={{ float: 'right' }}>
-          Download QR
-        </button>
-      </div>
+      <TextPanel />
 
       <div style={{ height: 220, width: 600 }}>
         <Tabs>
@@ -59,16 +44,14 @@ interface WorkbenchProps extends PropsWithChildren {
 
 export function WorkBench({ canvas }: WorkbenchProps) {
   return (
-    <GeneratorProvider canvasRef={canvas}>
+    <GeneratorPipelineProvider canvasRef={canvas}>
       <ColorAndShapeProvider>
         <ImageProvider>
           <QualityProvider>
-            <TextProvider>
-              <ControlPanel />
-            </TextProvider>
+            <ControlPanel />
           </QualityProvider>
         </ImageProvider>
       </ColorAndShapeProvider>
-    </GeneratorProvider>
+    </GeneratorPipelineProvider>
   );
 }
