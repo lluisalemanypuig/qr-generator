@@ -55,7 +55,7 @@ export function useGeneratorPipelineContext() {
 
   if (isNotDefined(context)) {
     throw new Error(
-      'useGeneratorContext must be used inside GeneratorProvider',
+      'useGeneratorPipelineContext must be used inside GeneratorPipelineProvider',
     );
   }
 
