@@ -1,7 +1,6 @@
 interface ShapeSelectProps<
   T,
 > extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  initialValue: string;
   allValues: readonly string[];
   setShape: (c: T) => void;
 }
@@ -16,7 +15,6 @@ function fromStringToShape<T>(shape: string, values: readonly string[]): T {
 }
 
 export function ShapeSelect<T>({
-  initialValue,
   allValues,
   setShape,
   ...selectProps
@@ -24,7 +22,6 @@ export function ShapeSelect<T>({
   return (
     <select
       {...selectProps}
-      value={initialValue}
       onChange={(event) =>
         setShape(fromStringToShape<T>(event.target.value, allValues))
       }

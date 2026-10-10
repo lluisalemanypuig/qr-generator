@@ -1,11 +1,13 @@
 import { isNotDefined } from '@utils/defined';
 import { Color } from '@workbench/enums/colors';
 import { ImageBackgroundShape } from '@workbench/enums/shapes';
-import { ImageOptions } from '@workbench/options/image';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { ImageControl, ImageOptions } from '@workbench/options/image';
+import { createContext, ReactNode, useContext, useRef, useState } from 'react';
 
 interface Image {
-  options: ImageOptions;
+  controlValues: ImageControl;
+  options: React.RefObject<ImageOptions>;
+
   setImage: (image: string | undefined) => void;
   setComponentsDisabled: (v: boolean) => void;
   setBackgroundComponentsDisabled: (v: boolean) => void;
@@ -19,19 +21,15 @@ interface Image {
 const ImageContext = createContext<Image | null>(null);
 
 export function ImageProvider({ children }: { children: ReactNode }) {
-  const [options, setOptions] = useState<ImageOptions>({
+  const [controlValues, setControlValues] = useState<ImageControl>({
     componentsDisabled: true,
     backgroundComponentsDisabled: true,
     image: undefined,
-    imageSize: 1,
     backgroundShape: 'None',
-    backgroundColor: 'White',
-    backgroundBorderColor: 'Black',
-    backgroundSize: 1,
   });
 
   const setComponentsDisabled = (componentsDisabled: boolean) => {
-    setOptions((previous) => ({
+    setControlValues((previous) => ({
       ...previous,
       componentsDisabled,
     }));
@@ -40,28 +38,21 @@ export function ImageProvider({ children }: { children: ReactNode }) {
   const setBackgroundComponentsDisabled = (
     backgroundComponentsDisabled: boolean,
   ) => {
-    setOptions((previous) => ({
+    setControlValues((previous) => ({
       ...previous,
       backgroundComponentsDisabled,
     }));
   };
 
   const setImage = (image: string | undefined) => {
-    setOptions((previous) => ({
+    setControlValues((previous) => ({
       ...previous,
       image,
     }));
   };
 
-  const setImageSize = (imageSize: number) => {
-    setOptions((previous) => ({
-      ...previous,
-      imageSize,
-    }));
-  };
-
   const setBackgroundShape = (backgroundShape: ImageBackgroundShape) => {
-    setOptions((previous) => ({
+    setControlValues((previous) => ({
       ...previous,
       backgroundShape,
     }));
@@ -73,30 +64,33 @@ export function ImageProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const options = useRef<ImageOptions>({
+    imageSize: 1,
+    backgroundColor: { name: 'White', id: 'white' },
+    backgroundBorderColor: { name: 'Black', id: 'black' },
+    backgroundSize: 1,
+  });
+
+  const setImageSize = (imageSize: number) => {
+    options.current.imageSize = imageSize;
+  };
+
   const setBackgroundColor = (backgroundColor: Color) => {
-    setOptions((previous) => ({
-      ...previous,
-      backgroundColor,
-    }));
+    options.current.backgroundColor = backgroundColor;
   };
 
   const setBackgroundBorderColor = (backgroundBorderColor: Color) => {
-    setOptions((previous) => ({
-      ...previous,
-      backgroundBorderColor,
-    }));
+    options.current.backgroundBorderColor = backgroundBorderColor;
   };
 
   const setBackgroundSize = (backgroundSize: number) => {
-    setOptions((previous) => ({
-      ...previous,
-      backgroundSize,
-    }));
+    options.current.backgroundSize = backgroundSize;
   };
 
   return (
     <ImageContext.Provider
       value={{
+        controlValues,
         options,
         setImage,
         setComponentsDisabled,

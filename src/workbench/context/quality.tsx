@@ -1,25 +1,22 @@
 import { isNotDefined } from '@utils/defined';
 import { ECC } from '@workbench/enums/quality';
 import { QualityOptions } from '@workbench/options/quality';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useRef } from 'react';
 
 interface Quality {
-  options: QualityOptions;
+  options: React.RefObject<QualityOptions>;
   setECC: (ecc: ECC) => void;
 }
 
 const QualityContext = createContext<Quality | null>(null);
 
 export function QualityProvider({ children }: { children: ReactNode }) {
-  const [options, setOptions] = useState<QualityOptions>({
+  const options = useRef<QualityOptions>({
     ecc: 'Low',
   });
 
   const setECC = (ecc: ECC) => {
-    setOptions((previous) => ({
-      ...previous,
-      ecc,
-    }));
+    options.current.ecc = ecc;
   };
 
   return (

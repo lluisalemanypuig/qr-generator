@@ -22,9 +22,9 @@ export function TextPanel() {
           onChange={(event) =>
             generateQrFromText(
               event.target.value,
-              colorAndShape,
+              colorAndShape.current,
               image,
-              quality,
+              quality.current,
             )
           }
           type="text"

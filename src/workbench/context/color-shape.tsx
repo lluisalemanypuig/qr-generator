@@ -2,11 +2,11 @@ import { isNotDefined } from '@utils/defined';
 import { Color } from '@workbench/enums/colors';
 import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
 import { ColorAndShapeOptions } from '@workbench/options/color-shape';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useRef } from 'react';
 import { useGeneratorPipelineContext } from './generator-pipeline';
 
 interface ColorAndShape {
-  options: ColorAndShapeOptions;
+  options: React.RefObject<ColorAndShapeOptions>;
   setFillColor: (color: Color) => void;
   setBorderColor: (color: Color) => void;
   setPointShape: (shape: PointShape) => void;
@@ -25,51 +25,36 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
     updateBackgroundTransparency,
   } = useGeneratorPipelineContext();
 
-  const [options, setOptions] = useState<ColorAndShapeOptions>({
-    fillColor: 'Black',
-    borderColor: 'Black',
+  const options = useRef<ColorAndShapeOptions>({
+    fillColor: { name: 'Black', id: 'black' },
+    borderColor: { name: 'Black', id: 'black' },
     pointShape: 'Square',
     alignmentShape: 'Square',
     transparentBackground: false,
   });
 
   const setFillColor = (fillColor: Color) => {
-    setOptions((previous) => ({
-      ...previous,
-      fillColor,
-    }));
+    options.current.fillColor = fillColor;
     updateFillColor(fillColor);
   };
 
   const setBorderColor = (borderColor: Color) => {
-    setOptions((previous) => ({
-      ...previous,
-      borderColor,
-    }));
+    options.current.borderColor = borderColor;
     updateBorderColor(borderColor);
   };
 
   const setPointShape = (pointShape: PointShape) => {
-    setOptions((previous) => ({
-      ...previous,
-      pointShape,
-    }));
+    options.current.pointShape = pointShape;
     updatePointShape(pointShape);
   };
 
   const setAlignmentShape = (alignmentShape: AlignmentShape) => {
-    setOptions((previous) => ({
-      ...previous,
-      alignmentShape,
-    }));
+    options.current.alignmentShape = alignmentShape;
     updateAlignmentShape(alignmentShape);
   };
 
   const setTransparentBackground = (transparentBackground: boolean) => {
-    setOptions((previous) => ({
-      ...previous,
-      transparentBackground,
-    }));
+    options.current.transparentBackground = transparentBackground;
     updateBackgroundTransparency(transparentBackground);
   };
 

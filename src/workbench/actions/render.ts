@@ -15,8 +15,8 @@ export function useGenerateCanvasFromtext(
     quality: QualityOptions,
   ) => {
     console.log(`Rendering full QR with text '${text}'`);
-    console.log(`   Fill color:      ${colorAndShape.fillColor}`);
-    console.log(`   Border color:    ${colorAndShape.borderColor}`);
+    console.log(`   Fill color:      ${colorAndShape.fillColor.name}`);
+    console.log(`   Border color:    ${colorAndShape.borderColor.name}`);
     console.log(`   Point shape:     ${colorAndShape.pointShape}`);
     console.log(`   Alignment shape: ${colorAndShape.alignmentShape}`);
     console.log(`   Transparency:    ${colorAndShape.transparentBackground}`);
