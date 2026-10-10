@@ -1,7 +1,7 @@
 import { isDefined } from '@utils/defined';
 import { CanvasRef } from '@utils/types';
 import { ColorAndShapeOptions } from '@workbench/options/color-shape';
-import { ImageOptions } from '@workbench/options/image';
+import { ImageControl, ImageOptions } from '@workbench/options/image';
 import { QualityOptions } from '@workbench/options/quality';
 
 export function useGenerateCanvasFromtext(
@@ -11,7 +11,8 @@ export function useGenerateCanvasFromtext(
   return (
     text: string,
     colorAndShape: ColorAndShapeOptions,
-    image: ImageOptions,
+    imageControl: ImageControl,
+    imageOptions: ImageOptions,
     quality: QualityOptions,
   ) => {
     console.log(`Rendering full QR with text '${text}'`);

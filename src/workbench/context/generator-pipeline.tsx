@@ -15,7 +15,7 @@ import {
 import { Color } from '@workbench/enums/colors';
 import { AlignmentShape, PointShape } from '@workbench/enums/shapes';
 import { ColorAndShapeOptions } from '@workbench/options/color-shape';
-import { ImageOptions } from '@workbench/options/image';
+import { ImageControl, ImageOptions } from '@workbench/options/image';
 import { QualityOptions } from '@workbench/options/quality';
 import { createContext, PropsWithChildren, useContext } from 'react';
 
@@ -25,7 +25,8 @@ interface GeneratorPipelineContextType {
   generateQrFromText: (
     text: string,
     colorAndShape: ColorAndShapeOptions,
-    image: ImageOptions,
+    imageControl: ImageControl,
+    imageOptions: ImageOptions,
     quality: QualityOptions,
   ) => void;
   refreshCanvas: () => void;

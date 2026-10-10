@@ -9,7 +9,8 @@ export function TextPanel() {
 
   const { generateQrFromText } = useGeneratorPipelineContext();
   const { options: colorAndShape } = useColorAndShapeContext();
-  const { options: image } = useImageContext();
+  const { controlValues: imageControl, options: imageOptions } =
+    useImageContext();
   const { options: quality } = useQualityContext();
 
   return (
@@ -23,7 +24,8 @@ export function TextPanel() {
             generateQrFromText(
               event.target.value,
               colorAndShape.current,
-              image,
+              imageControl,
+              imageOptions.current,
               quality.current,
             )
           }
