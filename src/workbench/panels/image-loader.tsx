@@ -9,6 +9,7 @@ import { ALL_IMAGE_BACKGROUND_SHAPES } from '@workbench/enums/shapes';
 
 export function ImageLoaderPanel() {
   const {
+    controlValues,
     options,
     setImage: _setImage,
     setComponentsDisabled,
@@ -33,7 +34,10 @@ export function ImageLoaderPanel() {
       <div className="horizontal col-1-3">
         <div className="vertical">
           <button onClick={loadImage}>Load image</button>
-          <button onClick={removeImage} disabled={options.componentsDisabled}>
+          <button
+            onClick={removeImage}
+            disabled={controlValues.componentsDisabled}
+          >
             Remove image
           </button>
         </div>
@@ -41,7 +45,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Image size'} />
             <RangeSelect
-              disabled={options.componentsDisabled}
+              disabled={controlValues.componentsDisabled}
               setValue={setImageSize}
             />
             <LabelLeftAligned text={'%'} />
@@ -49,8 +53,8 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background shape'} />
             <ShapeSelect
-              defaultValue={options.backgroundShape}
-              disabled={options.componentsDisabled}
+              defaultValue={controlValues.backgroundShape}
+              disabled={controlValues.componentsDisabled}
               allValues={ALL_IMAGE_BACKGROUND_SHAPES}
               setShape={setBackgroundShape}
             />
@@ -58,10 +62,10 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background color'} />
             <ColorSelect
-              initialValue={options.backgroundColor}
+              initialValue={options.current.backgroundColor}
               disabled={
-                options.componentsDisabled ||
-                options.backgroundComponentsDisabled
+                controlValues.componentsDisabled ||
+                controlValues.backgroundComponentsDisabled
               }
               setColor={setBackgroundColor}
             />
@@ -69,10 +73,10 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background border color'} />
             <ColorSelect
-              initialValue={options.backgroundBorderColor}
+              initialValue={options.current.backgroundBorderColor}
               disabled={
-                options.componentsDisabled ||
-                options.backgroundComponentsDisabled
+                controlValues.componentsDisabled ||
+                controlValues.backgroundComponentsDisabled
               }
               setColor={setBackgroundBorderColor}
             />
@@ -81,8 +85,8 @@ export function ImageLoaderPanel() {
             <LabelLeftAligned text={'Background size'} />
             <RangeSelect
               disabled={
-                options.componentsDisabled ||
-                options.backgroundComponentsDisabled
+                controlValues.componentsDisabled ||
+                controlValues.backgroundComponentsDisabled
               }
               setValue={setBackgroundSize}
             />
