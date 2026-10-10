@@ -26,8 +26,8 @@ export function ColorAndShapeProvider({ children }: { children: ReactNode }) {
   } = useGeneratorPipelineContext();
 
   const options = useRef<ColorAndShapeOptions>({
-    fillColor: 'Black',
-    borderColor: 'Black',
+    fillColor: { name: 'Black', id: 'black' },
+    borderColor: { name: 'Black', id: 'black' },
     pointShape: 'Square',
     alignmentShape: 'Square',
     transparentBackground: false,

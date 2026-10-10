@@ -25,8 +25,8 @@ export function ImageProvider({ children }: { children: ReactNode }) {
     image: undefined,
     imageSize: 1,
     backgroundShape: 'None',
-    backgroundColor: 'White',
-    backgroundBorderColor: 'Black',
+    backgroundColor: { name: 'White', id: 'white' },
+    backgroundBorderColor: { name: 'Black', id: 'black' },
     backgroundSize: 1,
   });
 

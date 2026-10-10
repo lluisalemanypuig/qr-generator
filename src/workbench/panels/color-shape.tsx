@@ -26,7 +26,7 @@ export function ColorShapePanel() {
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Fill color'} />
           <ColorSelect
-            defaultValue={options.current.fillColor}
+            initialValue={options.current.fillColor}
             setColor={setFillColor}
           />
           <LabelLeftAligned text={'Point shape'} />
@@ -39,7 +39,7 @@ export function ColorShapePanel() {
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Border color'} />
           <ColorSelect
-            defaultValue={options.current.borderColor}
+            initialValue={options.current.borderColor}
             setColor={setBorderColor}
           />
           <LabelLeftAligned text={'Alignment shape'} />

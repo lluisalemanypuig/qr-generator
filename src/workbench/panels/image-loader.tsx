@@ -58,7 +58,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background color'} />
             <ColorSelect
-              defaultValue={options.backgroundColor}
+              initialValue={options.backgroundColor}
               disabled={
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled
@@ -69,7 +69,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background border color'} />
             <ColorSelect
-              defaultValue={options.backgroundBorderColor}
+              initialValue={options.backgroundBorderColor}
               disabled={
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled

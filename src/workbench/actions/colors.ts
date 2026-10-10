@@ -20,7 +20,7 @@ export function useUpdateFillColor(
     assertCanvasDefined(canvasRef.current);
 
     canvasRef.current.getObjects().forEach((o) => {
-      o.set('fill', c);
+      o.set('fill', c.id);
     });
     refreshCanvas();
   };
@@ -34,7 +34,7 @@ export function useUpdateBorderColor(
     assertCanvasDefined(canvasRef.current);
 
     canvasRef.current.getObjects().forEach((o) => {
-      o.set('stroke', c);
+      o.set('stroke', c.id);
     });
     refreshCanvas();
   };

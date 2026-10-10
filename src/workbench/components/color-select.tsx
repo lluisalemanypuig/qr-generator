@@ -1,27 +1,24 @@
-import { Color, COLORS } from '@workbench/enums/colors';
+import { Color, COLORS, fromStringToColor } from '@workbench/enums/colors';
 
 interface ColorSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  initialValue: Color;
   setColor: (c: Color) => void;
 }
 
-function fromStringToColor(color: string): Color {
-  for (const v of COLORS) {
-    if (color === v) {
-      return color as Color;
-    }
-  }
-  return 'Black';
-}
-
-export function ColorSelect({ setColor, ...selectProps }: ColorSelectProps) {
+export function ColorSelect({
+  initialValue,
+  setColor,
+  ...selectProps
+}: ColorSelectProps) {
   return (
     <select
       {...selectProps}
+      defaultValue={initialValue.id}
       onChange={(event) => setColor(fromStringToColor(event.target.value))}
     >
       {COLORS.map((color: Color) => (
-        <option key={color} value={color}>
-          {color}
+        <option key={color.id} value={color.id}>
+          {color.name}
         </option>
       ))}
     </select>
