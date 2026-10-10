@@ -11,6 +11,7 @@ import {
 
 export function ColorShapePanel() {
   const {
+    options,
     setFillColor,
     setBorderColor,
     setPointShape,
@@ -24,15 +25,26 @@ export function ColorShapePanel() {
       <div className="vertical">
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Fill color'} />
-          <ColorSelect setColor={setFillColor} />
+          <ColorSelect
+            defaultValue={options.current.fillColor}
+            setColor={setFillColor}
+          />
           <LabelLeftAligned text={'Point shape'} />
-          <ShapeSelect allValues={ALL_POINT_SHAPES} setShape={setPointShape} />
+          <ShapeSelect
+            defaultValue={options.current.pointShape}
+            allValues={ALL_POINT_SHAPES}
+            setShape={setPointShape}
+          />
         </div>
         <div className="horizontal col-4">
           <LabelLeftAligned text={'Border color'} />
-          <ColorSelect setColor={setBorderColor} />
+          <ColorSelect
+            defaultValue={options.current.borderColor}
+            setColor={setBorderColor}
+          />
           <LabelLeftAligned text={'Alignment shape'} />
           <ShapeSelect
+            defaultValue={options.current.alignmentShape}
             allValues={ALL_ALIGNMENT_SHAPES}
             setShape={setAlignmentShape}
           />

@@ -49,6 +49,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background shape'} />
             <ShapeSelect
+              defaultValue={options.backgroundShape}
               disabled={options.componentsDisabled}
               allValues={ALL_IMAGE_BACKGROUND_SHAPES}
               setShape={setBackgroundShape}
@@ -57,6 +58,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background color'} />
             <ColorSelect
+              defaultValue={options.backgroundColor}
               disabled={
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled
@@ -67,6 +69,7 @@ export function ImageLoaderPanel() {
           <div className="horizontal col-3">
             <LabelLeftAligned text={'Background border color'} />
             <ColorSelect
+              defaultValue={options.backgroundBorderColor}
               disabled={
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled
