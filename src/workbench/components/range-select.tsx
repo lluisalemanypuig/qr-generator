@@ -1,6 +1,6 @@
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   minimum?: number;
-  initialValue?: number;
+  defaultValue?: number;
   maximum?: number;
   step?: number;
   setValue: (v: number) => void;
@@ -8,23 +8,23 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function RangeSelect({
   minimum = 0,
-  initialValue = 1,
+  defaultValue = 1,
   maximum = 2,
   step = 0.01,
   setValue,
   ...inputProps
 }: Props) {
-  if (initialValue < minimum) {
-    initialValue = minimum;
+  if (defaultValue < minimum) {
+    defaultValue = minimum;
   }
-  if (initialValue > maximum) {
-    initialValue = maximum;
+  if (defaultValue > maximum) {
+    defaultValue = maximum;
   }
 
   return (
     <input
       {...inputProps}
-      defaultValue={initialValue}
+      defaultValue={defaultValue}
       min={minimum}
       max={maximum}
       step={step}
