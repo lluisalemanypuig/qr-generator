@@ -50,7 +50,6 @@ export function ImageLoaderPanel() {
             <LabelLeftAligned text={'Background shape'} />
             <ShapeSelect
               disabled={options.componentsDisabled}
-              initialValue={options.backgroundShape}
               allValues={ALL_IMAGE_BACKGROUND_SHAPES}
               setShape={setBackgroundShape}
             />
@@ -62,7 +61,6 @@ export function ImageLoaderPanel() {
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled
               }
-              initialValue={options.backgroundColor}
               setColor={setBackgroundColor}
             />
           </div>
@@ -73,7 +71,6 @@ export function ImageLoaderPanel() {
                 options.componentsDisabled ||
                 options.backgroundComponentsDisabled
               }
-              initialValue={options.backgroundBorderColor}
               setColor={setBackgroundBorderColor}
             />
           </div>

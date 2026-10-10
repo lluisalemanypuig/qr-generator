@@ -4,14 +4,14 @@ import { VerticalSpace } from '@workbench/components/spaces';
 import { useQualityContext } from '@workbench/context/quality';
 
 export function QualityPanel() {
-  const { options, setECC } = useQualityContext();
+  const { setECC } = useQualityContext();
 
   return (
     <>
       <VerticalSpace />
       <div className="horizontal col-4">
         <LabelLeftAligned text={'ECC'} />
-        <ECCSelect initialValue={options.ecc} setECC={setECC} />
+        <ECCSelect setECC={setECC} />
       </div>
     </>
   );
